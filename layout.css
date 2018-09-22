@@ -1,0 +1,45 @@
+@charset "utf-8";
+
+body {
+	margin:0;
+	padding:0;
+	background-color:#c0c0c0;
+}
+
+#container {
+	display:flex;
+	flex-direction:column;
+	width:100%;
+}
+
+.l-header {
+	display:flex;
+	
+	border:#0000ff 1px solid;
+	
+}
+
+.l-main {
+	display:flex;
+	
+	border:#00ff00 1px solid;
+
+}
+
+.l-main-left {
+	flex-direction:column;
+	flex:1;
+	padding:4px;
+	
+	border:#ff0000 1px solid;
+}
+
+.l-main-right {
+	flex-direction:column;
+	padding:4px;
+	
+	
+	border:#0000ff 1px solid;
+}
+
+
