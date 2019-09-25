@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+.table-border1 {
+	border:1px #ffffff ridge;
+}
+
+
+
+.tr-green {
+	background-color:#00ff00;
+}
+
+.tr-odd {
+
+}
+
+.tr-even {
+	background-color:#00dddd;
+}
+
+
+
+
+
+.th-green {
+	background-color:#00ff00;
+}
+
+

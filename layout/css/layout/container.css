@@ -1,0 +1,11 @@
+@charset "utf-8";
+
+.c-button-horizon {
+	display:flex;
+}
+
+.c-button-horizon form {
+	display:flex;
+	align-items:center;
+}
+

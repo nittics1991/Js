@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" type="text/css" href="js/jquery-ui/1.12.1/jquery-ui.min.css" />
+
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script src="js/less/3.8.1/less.min.js"></script>
+
+<title>test</title>
+
+<style>
+
+#l-main-left {
+	width:200px;
+	overflow-x:scroll;
+}
+
+#l-main-right {
+	width:300px;
+}
+
+
+
+div {
+	border:#00ff00 1px solid;
+
+}
+
+
+select:hover {
+	cursor:pointer;
+}
+
+
+</style>
+
+</head>
+<body>
+<div id="container">
+
+<header id="l-header">
+	<div class="c-button-horizon">
+		<form name="pb_button" method="get">
+		
+	    <div><select name="cd_bumon" title="部門選択">
+	 			<option>&nbsp;</option>
+				<option>Slower</option>
+				<option>Slow</option>
+    		<option>Medium</option>
+    		<option>Fast</option>
+    		<option>Faster</option>
+	    </select></div>
+		
+	    <div><select name="kb_nendo">
+	 			<option>&nbsp;</option>
+				<option>2018</option>
+				<option>2017</option>
+    		<option>2016</option>
+    		<option>2015</option>
+	    </select></div>
+		
+			<div><input type="checkbox" name="chk_nendo_all" id="chk_nendo_all" value="1">
+				<label for="chk_nendo_all">以降</label></div>
+			
+			<div><input type="checkbox" name="chk_kansei" id="chk_kansei" value="1">
+				<label for="chk_kansei">仕掛</label></div>
+			
+			<div><button id="pb_reflesh" type="button">検索</button></div>
+			<div class="button-space"></div>
+			<div><button id="pb_export" type="button" class="ui-widget ui-button ui-state-default">EXCEL出力</button></div>
+			<div><a href="" target="_top" class="ui-widget ui-button ui-state-default">製番管理</a></div>
+			
+		</form>
+		
+		<form name="pb_record" method="get">
+			
+			<div><button id="pb_record_set" type="button">●</button></div>
+			<div><button id="pb_record_reset" type="button">○</button></div>
+			
+		</form>
+		
+	</div>
+	
+	<div class="c-button-horizon">
+		<div><button id="pb_reflesh2" type="button">検索2</button></div>
+		<div><button id="pb_reflesh3" type="button">検索3</button></div>
+	</div>
+	
+	<div class="message-text">
+	</div>
+	
+	
+</header>
+
+<div id="l-main">
+
+<div id="l-main-center" class="">
+	<div class="">
+		
+		<table class="" id="table-jyutyu">
+			<thead>
+				<tr class="tr-green">
+					<th class="">受注</th>
+					<th class="">201804</th>
+					<th class="">201805</th>
+					<th class="">201806</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="tr-odd">
+					<th class="th-green">既発</th>
+					<td class="u-align-right">10</td>
+					<td class="u-align-right">20</td>
+					<td class="u-align-right">30</td>
+				</tr>
+				<tr class="tr-even">
+					<th class="th-green clickable">プロスペクト</th>
+					<td class="u-align-right">1</td>
+					<td class="u-align-right">2</td>
+					<td class="u-align-right">3</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<table class="" id="table-uriage">
+			<thead>
+				<tr class="tr-green">
+					<th class="">売上</th>
+					<th class="">201804</th>
+					<th class="">201805</th>
+					<th class="">201806</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="tr-odd">
+					<th class="th-green">既発</th>
+					<td class="u-align-right">10</td>
+					<td class="u-align-right">20</td>
+					<td class="u-align-right">30</td>
+				</tr>
+				<tr class="tr-even">
+					<th class="th-green clickable">プロスペクト</th>
+					<td class="u-align-right">1</td>
+					<td class="u-align-right">2</td>
+					<td class="u-align-right">3</td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</div>
+	
+	<div class="u-margin-top">
+		
+		
+		<div>left</div>
+		<div>left</div>
+		<div>left</div>
+		<div>left</div>
+		<div>left</div>
+		<div>left</div>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</div>
+
+<div id="l-main-right" class="">
+	<div class="">
+		
+		
+		<div>right</div>
+		<div>right</div>
+		<div>right</div>
+		<div>right</div>
+		<div>right</div>
+		<div>right</div>
+		
+		
+	</div>
+</div>
+
+</div>
+
+</div>
+
+
+<!--
+<script src="js/jquery-ui/1.12.1/external/jquery/jquery.js"></script>
+<script src="js/jquery-ui/1.12.1/jquery-ui.min.js"></script>
+-->
+
+
+<script>
+
+(function() {
+	document.querySelector('#l-header .message-text')
+		.addEventListener('click', function(e) {
+			alert('test');
+		});
+	
+	
+	//$('#pb_export').button();
+	
+	
+	
+	
+})();
+
+</script>
+</body>
+</html>

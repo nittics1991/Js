@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"> 
+
+<style>
+
+
+canvas {
+	border:1px ridge #0000ff;
+}
+
+
+table {
+	
+}
+
+.setting-area th,td {
+	border: 1px ridge #cfcfcf;
+}
+
+</style>
+
+</head>
+<body>
+
+<div id="main">
+<div id="frame1" class="frame">
+	<h4></h4>
+	<div class="stamp-area">
+		<div id="date_stamp"></div>
+	</div>
+	<div>
+		<select id="selector">
+			<option value=""></option>
+			<option value="dateStamp">日付印</option>
+			<option value="signetStamp">認印</option>
+			<option value="squareStamp">角印</option>
+			<option value="companyStamp">社印</option>
+		</select>
+	</div>
+	
+</div>
+
+</div>
+
+<script src="../src/StampFactory.js"></script> 
+<script src="../src/StampBuilder.js"></script> 
+
+<script src="../src/StampFrame.js"></script> 
+<script src="../src/StampData.js"></script>
+
+<script src="../src/HorizonText.js"></script> 
+<script src="../src/VerticalText.js"></script> 
+
+<script src="../src/CircleHorizonBorder.js"></script> 
+<script src="../src/CircleVerticalBorder.js"></script> 
+
+<script src="../src/RectHorizonBorder.js"></script> 
+<script src="../src/RectVerticalBorder.js"></script> 
+
+<script src="../src/HorizonPlacement.js"></script> 
+<script src="../src/VerticalPlacement.js"></script> 
+
+<script src="../src/OptionPosition.js"></script> 
+
+<script src="../src/RectStamp.js"></script> 
+<script src="../src/CircleStamp.js"></script> 
+
+<script src="../src/Shapes.js"></script> 
+<script src="../src/StampJs.js"></script> 
+ 
+<script src="../src/CanvasRender.js"></script> 
+
+<script>
+
+var data = {
+	type:null,
+	frame:{
+		stamp_type:'rect',
+		stamp_width:120,
+		stamp_height:120,
+		line_weight:3,
+		stamp_color:'red',
+		border_direction:'N',
+		text_placement:'H',
+		text_direction:'V',
+		option_position:'non',
+	},
+	data:[
+		{
+			stamp_text:'太一郎',
+			font_family:'',
+			font_size:30,
+			text_align:'center',
+			vertical_align:'middle',
+			margin_size:0,
+		},
+		{
+			stamp_text:'青木',
+			font_family:'',
+			font_size:38,
+			text_align:'center',
+			vertical_align:'middle',
+			margin_size:0,
+		},
+	],
+};
+
+
+var selector = document.querySelector('#selector');
+
+selector.addEventListener('change', function(e) {
+	let factory = new StampFactory();
+	let builder = factory.builder();
+	
+	let selected = e.target.selectedOptions[0].value;
+	let stamp;
+	
+	if (selected == 'dateStamp') {
+		stamp = builder.dateStamp('#date_stamp', data);
+	} else if (selected == 'signetStamp') {
+		stamp = builder.signetStamp('#date_stamp', data);
+	} else if (selected == 'squareStamp') {
+		stamp = builder.squareStamp('#date_stamp', data);
+	} else if (selected == 'companyStamp') {
+		stamp = builder.companyStamp('#date_stamp', data);
+	}
+	stamp.render();
+});
+
+</script>
+	
+</body>
+</html>

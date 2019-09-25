@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+select:hover {
+	cursor:pointer;
+}
+
+button:hover {
+	cursor:pointer;
+}
+
+input[type="radio"]:hover, input[type="radio"]+label:hover {
+	cursor:pointer;
+}
+
+input[type="checkbox"]:hover, input[type="checkbox"]+label:hover {
+	cursor:pointer;
+}
+
+input:invalid {
+	border:2px #ff0000 solid;
+}

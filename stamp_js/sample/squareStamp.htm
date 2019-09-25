@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"> 
+
+<style>
+
+
+canvas {
+	border:1px ridge #0000ff;
+}
+
+
+table {
+	
+}
+
+.setting-area th,td {
+	border: 1px ridge #cfcfcf;
+}
+
+</style>
+
+</head>
+<body>
+
+<div id="main">
+<div id="frame1" class="frame">
+	<h4>角印</h4>
+	<div class="stamp-area">
+		<div id="date_stamp"></div>
+	</div>
+</div>
+
+</div>
+
+<script src="../src/StampFactory.js"></script> 
+<script src="../src/StampBuilder.js"></script> 
+
+<script src="../src/StampFrame.js"></script> 
+<script src="../src/StampData.js"></script>
+
+<script src="../src/HorizonText.js"></script> 
+<script src="../src/VerticalText.js"></script> 
+
+<script src="../src/CircleHorizonBorder.js"></script> 
+<script src="../src/CircleVerticalBorder.js"></script> 
+
+<script src="../src/RectHorizonBorder.js"></script> 
+<script src="../src/RectVerticalBorder.js"></script> 
+
+<script src="../src/HorizonPlacement.js"></script> 
+<script src="../src/VerticalPlacement.js"></script> 
+
+<script src="../src/OptionPosition.js"></script> 
+
+<script src="../src/RectStamp.js"></script> 
+<script src="../src/CircleStamp.js"></script> 
+
+<script src="../src/Shapes.js"></script> 
+<script src="../src/StampJs.js"></script> 
+ 
+<script src="../src/CanvasRender.js"></script> 
+
+<script>
+
+var data = {
+	type:null,
+	frame:{
+		stamp_type:'rect',
+		stamp_width:120,
+		stamp_height:120,
+		line_weight:3,
+		stamp_color:'red',
+		border_direction:'N',
+		text_placement:'H',
+		text_direction:'V',
+		option_position:'non',
+	},
+	data:[
+		{
+			stamp_text:'太一郎',
+			font_family:'',
+			font_size:38,
+			text_align:'center',
+			vertical_align:'middle',
+			margin_size:0,
+		},
+		{
+			stamp_text:'青木',
+			font_family:'',
+			font_size:50,
+			text_align:'center',
+			vertical_align:'middle',
+			margin_size:0,
+		},
+	],
+};
+
+window.addEventListener('load', function() {
+	let obj = new StampJs('#date_stamp', data);
+	obj.render();
+});
+
+</script>
+	
+</body>
+</html>

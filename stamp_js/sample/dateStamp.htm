@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"> 
+
+<style>
+
+
+canvas {
+	border:1px ridge #0000ff;
+}
+
+
+table {
+	
+}
+
+.setting-area th,td {
+	border: 1px ridge #cfcfcf;
+}
+
+</style>
+
+</head>
+<body>
+
+<div id="main">
+<div id="frame1" class="frame">
+	<h4>日付印</h4>
+	<div class="stamp-area">
+		<div id="date_stamp"></div>
+	</div>
+	<div class="setting-area">
+		<table class="setting-full">
+			<thead>
+				<tr>
+					<th></th>
+					<th>全体</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="stamp-width">
+					<th>全体幅</th>
+					<td>
+						<input type="number" name="frame1_stamp_width" value="38"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="stamp-height">
+					<th>全体高</th>
+					<td>
+						<input type="number" name="frame1_stamp_height" value="38"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="line-weight">
+					<th>線幅</th>
+					<td>
+						<input type="number" name="frame1_line-weight" value="2"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="stamp-color">
+					<th>印影色</th>
+					<td>
+						<input type="radio" name="frame1_stamp_color[]" value="red" checked>赤</inpit>
+						<input type="radio" name="frame1_stamp_color[]" value="black">黒</inpit>
+					</td>
+				</tr>
+				
+				<tr class="option-position">
+					<th>追加情報</th>
+					<td>
+						<input type="radio" name="frame1_option_position[]" value="non" checked>無</inpit>
+						<input type="radio" name="frame1_option_position[]" value="left" disabled>左</inpit>
+						<input type="radio" name="frame1_option_position[]" value="right" disabled>右</inpit>
+						<input type="radio" name="frame1_option_position[]" value="top">上</inpit>
+						<input type="radio" name="frame1_option_position[]" value="bottom">下</inpit>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<table class="setting-parts">
+			<thead>
+				<tr>
+					<th></th>
+					<th>1段目</th>
+					<th>2段目</th>
+					<th>3段目</th>
+					<th>追加情報</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="stamp-text">
+					<th>表示文字</th>
+					<td>
+						<input type="text" name="frame1_stamp_text[1]"></inpit>
+					</td>
+					<td>
+						<input type="date" name="frame1_stamp_text[2]"></inpit>
+					</td>
+					<td>
+						<input type="text" name="frame1_stamp_text[3]"></inpit>
+					</td>
+					<td>
+						<input type="text" name="frame1_stamp_text[4]"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="font-family">
+					<th>フォント</th>
+					<td>
+						<select name="frame1_font_family[1]"></select>
+					</td>
+					<td>
+						<select name="frame1_font_family[2]"></select>
+					</td>
+					<td>
+						<select name="frame1_font_family[3]"></select>
+					</td>
+					<td>
+						<select name="frame1_font_family[4]"></select>
+					</td>
+				</tr>
+				
+				<tr class="font-size">
+					<th>サイズ</th>
+					<td>
+						<input type="number" name="frame1_font_size[1]" value="10"></inpit>
+					</td>
+					<td>
+						<input type="number" name="frame1_font_size[2]" value="10"></inpit>
+					</td>
+					<td>
+						<input type="number" name="frame1_font_size[3]" value="10"></inpit>
+					</td>
+					<td>
+						<input type="number" name="frame1_font_size[4]" value="10"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="text-align">
+					<th>横配置</th>
+					<td>
+						<select name="frame1_text_align[1]">
+							<option value="left">左</option>
+							<option value="center" selected>中央</option>
+							<option value="right">右</option>
+						</select>
+					</td>
+					<td>
+						<select name="frame1_text_align[2]">
+							<option value="left">左</option>
+							<option value="center" selected>中央</option>
+							<option value="right">右</option>
+						</select>
+					</td>
+					<td>
+						<select name="frame1_text_align[3]">
+							<option value="left">左</option>
+							<option value="center" selected>中央</option>
+							<option value="right">右</option>
+						</select>
+					</td>
+					<td>
+						<select name="frame1_text_align[4]">
+							<option value="left">左</option>
+							<option value="center">中央</option>
+							<option value="right" selected>右</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr class="vertical-align">
+					<th>縦配置</th>
+					<td>
+						<select name="frame1_vertical_align[1]">
+							<option value="top">上</option>
+							<option value="middle">中央</option>
+							<option value="bottom" selected>下</option>
+						</select>
+					</td>
+					<td>
+						<select name="frame1_vertical_align[2]">
+							<option value="top">上</option>
+							<option value="middle" selected>中央</option>
+							<option value="bottom">下</option>
+						</select>
+					</td>
+					<td>
+						<select name="frame1_vertical_align[3]">
+							<option value="top" selected>上</option>
+							<option value="middle">中央</option>
+							<option value="bottom">下</option>
+						</select>
+					</td>
+					<td>
+						<select name="frame1_vertical_align[4]">
+							<option value="top" selected>上</option>
+							<option value="middle">中央</option>
+							<option value="bottom">下</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr class="margin-size">
+					<th>マージン</th>
+					<td>
+						<input type="number" name="frame1_margin-size[1]" value="1"></inpit>
+					</td>
+					<td>
+						<input type="number" name="frame1_margin-size[2]" value="1"></inpit>
+					</td>
+					<td>
+						<input type="number" name="frame1_margin-size[3]" value="1"></inpit>
+					</td>
+					<td>
+						<input type="number" name="frame1_margin-size[4]" value="1"></inpit>
+					</td>
+				</tr>
+				
+			</tbody>
+		</table>
+	</div>
+</div>
+
+</div>
+
+<script src="../src/StampFactory.js"></script> 
+<script src="../src/StampBuilder.js"></script> 
+
+<script src="../src/StampFrame.js"></script> 
+<script src="../src/StampData.js"></script>
+
+<script src="../src/HorizonText.js"></script> 
+<script src="../src/VerticalText.js"></script> 
+
+<script src="../src/CircleHorizonBorder.js"></script> 
+<script src="../src/CircleVerticalBorder.js"></script> 
+
+<script src="../src/RectHorizonBorder.js"></script> 
+<script src="../src/RectVerticalBorder.js"></script> 
+
+<script src="../src/HorizonPlacement.js"></script> 
+<script src="../src/VerticalPlacement.js"></script> 
+
+<script src="../src/OptionPosition.js"></script> 
+
+<script src="../src/RectStamp.js"></script> 
+<script src="../src/CircleStamp.js"></script> 
+
+<script src="../src/Shapes.js"></script> 
+<script src="../src/StampJs.js"></script> 
+ 
+<script src="../src/CanvasRender.js"></script> 
+
+<script>
+
+var data = {
+	type:null,
+	frame:{
+		stamp_type:'circle',
+		stamp_width:200,
+		stamp_height:200,
+		line_weight:3,
+		stamp_color:'red',
+		border_direction:'H',
+		text_placement:'V',
+		text_direction:'H',
+		option_position:'bottom',
+	},
+	data:[
+		{
+			stamp_text:'(営業1)M',
+			font_family:'',
+			font_size:30,
+			text_align:'center',
+			vertical_align:'bottom',
+			margin_size:0,
+		},
+		{
+			stamp_text:'2020/12/31',
+			font_family:'',
+			font_size:30,
+			text_align:'center',
+			vertical_align:'middle',
+			margin_size:0,
+		},
+		{
+			stamp_text:'青木 太郎',
+			font_family:null,
+			font_size:30,
+			text_align:'center',
+			vertical_align:'top',
+			margin_size:0,
+		},
+		{
+			stamp_text:'代',
+			font_family:null,
+			font_size:30,
+			text_align:'right',
+			vertical_align:'bottom',
+			margin_size:0,
+		},
+	],
+};
+
+window.addEventListener('load', function() {
+	let obj = new StampJs('#date_stamp', data);
+	obj.render();
+});
+
+</script>
+	
+</body>
+</html>
