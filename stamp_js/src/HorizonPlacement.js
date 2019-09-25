@@ -57,11 +57,11 @@ HorizonPlacement.prototype._calcTextPosition = function(dt, i, width) {
     let x = 0;
     let y = 0;
 
-    if (dt.vertical_align == 'bottom') {
+    if (dt.isBottom()) {
         y = this._base_position[1]
             + this._stampFrame.stamp_width
             - dt.margin_size;
-    } else if (dt.vertical_align == 'middle') {
+    } else if (dt.isMiddle()) {
         y = this._base_position[1]
             + this._stampFrame.stamp_width / 2;
     } else {
@@ -69,11 +69,11 @@ HorizonPlacement.prototype._calcTextPosition = function(dt, i, width) {
             + dt.margin_size;
     }
 
-    if (dt.text_align == 'right') {
+    if (dt.isRight()) {
         x = this._base_position[0]
             + width * (i + 1)
             + dt.margin_size;
-    } else if (dt.text_align == 'center') {
+    } else if (dt.isCenter()) {
         x = this._base_position[0]
             + width * i
             + width / 2

@@ -50,13 +50,13 @@ Shapes.prototype._buildShape = function() {
     let stampData = this._stampData;
     let option_text = {};
 
-    if (this._stampFrame.option_position != 'non') {
+    if (!this._stampFrame.isNonOption()) {
         option_text = stampData.pop();
     }
 
     this.data = this.data.concat(this._calcText(stampData));
 
-    if (this._stampFrame.option_position != 'non') {
+    if (!this._stampFrame.isNonOption()) {
         this.data = this.data.concat(this._calcOption(option_text));
     }
 };
@@ -89,7 +89,7 @@ Shapes.prototype._calcCanvasWidth = function() {
 *   @return float
 */
 Shapes.prototype._calcCanvasHeight = function() {
-    return this._stampFrame.isHorizonOption()?
+    return this._stampFrame.isVerticalOption()?
         this._stampFrame.stamp_height
             + this._calcMovement():
         this._stampFrame.stamp_height;
@@ -118,11 +118,11 @@ Shapes.prototype._calcBasePosition = function() {
     let x = 0;
     let y = 0;
 
-    if (this._stampFrame.option_position == 'top') {
+    if (this._stampFrame.isTopOption()) {
         y = this._calcMovement();
     }
 
-    if (this._stampFrame.option_position == 'left') {
+    if (this._stampFrame.isLeftOption()) {
         x = this._calcMovement();
     }
 

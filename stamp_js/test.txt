@@ -1,63 +1,6 @@
 
-frameにplacementとdirectionを追加したので注意
-placement Hは水平線の意味で作っているが、配置という意味ではH/V逆では?
-
-////////////////////////////////
-
-Builderのコメントを確認の事
-
-////////////////////////////////
-
-
-レシピ
-	circle/rect
-	placement V/H
-	border H/V
-	direction H/V
-	option Y/N
-	data...
-
-
-class見直しか?
-	optionはpos計算と命令生成まとめる?
-	命令をarrayで渡しているけど、定義がないからわからない
-
-shapesがroot?
-
-shapesでborderをnewする?
-	今はcircleの中でborder をnew
-
-shapes にstampJs(view)をinjectして描画?
-	今はshapesにstampJsで shapes　をnew
-
-レシピからfactoryで色々newしてshapes(root)にinjectして描画?
-	最初にdata/frameでvalidate
-	OKなら続ける
-
-constructorの引数のうち、base_position だけちょっとちがう
-	data/frameとbase_position
-
-一部のclassはconstructorではなくmethodで引数を渡すか?
+CircleVerticalBorderLeftOption
+    optionおかしい
 
 
 
-/////////////////////////////////
-
-font-type
-	sans-serif,serif,monospace
-
-let textObject = this._frameObject.textDirection == 'H'?みたいに
-定数比較している所はisHorizonTextDirection()に変更
-
-propertyはすべて_XXXX
-外部からのアクセスはmethodで
-
-border有無を外部から設定できるようにする
-
-newしている所をfactory化
-
-
-HTML画面はどうする?
-	font-typeなどはselect/radioとinput textの組み合わせ?
-	save,reset,download,upload
-	

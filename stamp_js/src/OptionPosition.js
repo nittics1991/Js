@@ -30,9 +30,7 @@ OptionPosition.prototype.exec = function(stampFrame, stampData) {
 OptionPosition.prototype._exec = function(stampData) {
     let pos;
 
-    if (this._stampFrame.option_position == 'top'
-        || this._stampFrame.option_position == 'bottom'
-    ) {
+    if (this._stampFrame.isHorizonOption()) {
         pos = this._calcHorizonPosition(stampData);
     } else {
         pos = this._calcVerticalPosition(stampData);
@@ -58,11 +56,11 @@ OptionPosition.prototype._calcHorizonPosition = function(stampData) {
     let max_width = this._stampFrame.stamp_width;
     let base_position = this._calcOptionPosition();
 
-    if (stampData.text_align == 'right') {
+    if (stampData.isRight()) {
         x = base_position.x
             + this._stampFrame.stamp_width
             - stampData.margin_size;
-    } else if (stampData.text_align == 'center') {
+    } else if (stampData.isCenter()) {
         x = base_position.x
             + this._stampFrame.stamp_width / 2;
     } else {
@@ -70,11 +68,11 @@ OptionPosition.prototype._calcHorizonPosition = function(stampData) {
             + stampData.margin_size;
     }
 
-    if (stampData.vertical_align == 'bottom') {
+    if (stampData.isBottom()) {
         y = base_position.y
             + stampData.font_size
             + stampData.margin_size;
-    } else if (stampData.vertical_align == 'middle') {
+    } else if (stampData.isMiddle()) {
         y = base_position.y
             + stampData.font_size / 2
             + stampData.margin_size;
@@ -97,11 +95,11 @@ OptionPosition.prototype._calcVerticalPosition = function(stampData) {
     let max_width = this._stampFrame.stamp_width;
     let base_position = this._calcOptionPosition();
 
-    if (stampData.vertical_align == 'bottom') {
+    if (stampData.isBottom()) {
         y = base_position.y
             + this._stampFrame.stamp_height
             - stampData.margin_size;
-    } else if (stampData.vertical_align == 'middle') {
+    } else if (stampData.isMiddle()) {
         y = base_position.y
             + this._stampFrame.stamp_height / 2;
     } else {
@@ -109,11 +107,11 @@ OptionPosition.prototype._calcVerticalPosition = function(stampData) {
             + stampData.margin_size;
     }
 
-    if (stampData.text_align == 'right') {
+    if (stampData.isRight()) {
         x = base_position.x
             + stampData.font_size
             + stampData.margin_size;
-    } else if (stampData.text_align == 'center') {
+    } else if (stampData.isCenter()) {
         x = base_position.x
             + stampData.font_size / 2
             + stampData.margin_size;
@@ -133,11 +131,11 @@ OptionPosition.prototype._calcOptionPosition = function() {
     let x = 0;
     let y = 0;
 
-    if (this._stampFrame.option_position == 'bottom') {
+    if (this._stampFrame.isBottomOption()) {
         y = this._stampFrame.stamp_height;
     }
 
-    if (this._stampFrame.option_position == 'right') {
+    if (this._stampFrame.isRightOption()) {
         x = this._stampFrame.stamp_width;
     }
 

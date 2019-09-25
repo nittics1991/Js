@@ -53,3 +53,61 @@ StampData.prototype.validate = function() {
 
     return true;
 };
+
+//文字水平方向
+
+/**
+*   isLeft
+*
+*   @return bool
+*/
+StampData.prototype.isLeft = function() {
+    return this.text_align == 'left';
+};
+
+/**
+*   isCenter
+*
+*   @return bool
+*/
+StampData.prototype.isCenter = function() {
+    return this.text_align == 'center';
+};
+
+/**
+*   isRight
+*
+*   @return bool
+*/
+StampData.prototype.isRight = function() {
+    return this.text_align == 'right';
+};
+
+//文字垂直方向
+
+/**
+*   isTop
+*
+*   @return bool
+*/
+StampData.prototype.isTop = function() {
+    return this.vertical_align == 'top';
+};
+
+/**
+*   isMiddle
+*
+*   @return bool
+*/
+StampData.prototype.isMiddle = function() {
+    return this.vertical_align == 'middle';
+};
+
+/**
+*   isBottom
+*
+*   @return bool
+*/
+StampData.prototype.isBottom = function() {
+    return this.vertical_align == 'bottom';
+};

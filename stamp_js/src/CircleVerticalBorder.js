@@ -29,7 +29,7 @@ CircleVerticalBorder.prototype.exec = function(stampFrame, stampData, base_posit
 CircleVerticalBorder.prototype._exec = function() {
     let ctrl = [];
 
-    let data_count = this._stampFrame.option_position == 'non'?
+    let data_count = this._stampFrame.isNonOption()?
         this._stampData.length:
         this._stampData.length - 1;
 

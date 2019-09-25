@@ -208,3 +208,40 @@ StampFrame.prototype.isHorizonOption = function() {
     return this.option_position == 'top'
         || this.option_position == 'bottom';
 };
+
+/**
+*   isTopOption
+*
+*   @return bool
+*/
+StampFrame.prototype.isTopOption = function() {
+    return this.option_position == 'top';
+};
+
+/**
+*   isBottomOption
+*
+*   @return bool
+*/
+StampFrame.prototype.isBottomOption = function() {
+    return this.option_position == 'bottom';
+};
+
+/**
+*   isLeftOption
+*
+*   @return bool
+*/
+StampFrame.prototype.isLeftOption = function() {
+    return this.option_position == 'left';
+};
+
+/**
+*   isRightOption
+*
+*   @return bool
+*/
+StampFrame.prototype.isRightOption = function() {
+    return this.option_position == 'right';
+};
+

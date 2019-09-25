@@ -29,7 +29,7 @@ CircleHorizonBorder.prototype.exec = function(stampFrame, stampData, base_positi
 CircleHorizonBorder.prototype._exec = function() {
     let ctrl = [];
 
-    let data_count = this._stampFrame.option_position == 'non'?
+    let data_count = this._stampFrame.isNonOption()?
         this._stampData.length:
         this._stampData.length - 1;
 
