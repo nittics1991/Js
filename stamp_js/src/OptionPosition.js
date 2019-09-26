@@ -30,7 +30,7 @@ OptionPosition.prototype.exec = function(stampFrame, stampData) {
 OptionPosition.prototype._exec = function(stampData) {
     let pos;
 
-    if (this._stampFrame.isHorizonOption()) {
+    if (this._stampFrame.isVerticalOption()) {
         pos = this._calcHorizonPosition(stampData);
     } else {
         pos = this._calcVerticalPosition(stampData);

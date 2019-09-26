@@ -29,8 +29,8 @@ StampFactory.prototype.textObjectForOption = function(stampFrame) {
     }
 
     return stampFrame.isVerticalOption()?
-        new VerticalText():
-        new HorizonText();
+        new HorizonText():
+        new VerticalText();
 };
 
 /**

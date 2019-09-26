@@ -16,8 +16,6 @@ let StampJs = function(selector, dataset) {
 StampJs.prototype.render = function() {
     let factory = new StampFactory();
 
-    //dateStampとか呼び出しどうする?
-
     let shapes = factory.shapes(this.dataset);
     shapes.build();
     let render = factory.render(shapes);

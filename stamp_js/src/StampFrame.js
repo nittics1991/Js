@@ -195,8 +195,8 @@ StampFrame.prototype.isNonOption = function() {
 *   @return bool
 */
 StampFrame.prototype.isVerticalOption = function() {
-    return this.option_position == 'left'
-        || this.option_position == 'right';
+    return this.option_position == 'top'
+        || this.option_position == 'bottom';
 };
 
 /**
@@ -205,8 +205,8 @@ StampFrame.prototype.isVerticalOption = function() {
 *   @return bool
 */
 StampFrame.prototype.isHorizonOption = function() {
-    return this.option_position == 'top'
-        || this.option_position == 'bottom';
+    return this.option_position == 'left'
+        || this.option_position == 'right';
 };
 
 /**
