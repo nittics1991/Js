@@ -77,7 +77,7 @@ Shapes.prototype._calcCanvas = function() {
 *   @return float
 */
 Shapes.prototype._calcCanvasWidth = function() {
-    return this._stampFrame.isVerticalOption()?
+    return this._stampFrame.isHorizonOption()?
         this._stampFrame.stamp_width
             + this._calcMovement():
         this._stampFrame.stamp_width;
