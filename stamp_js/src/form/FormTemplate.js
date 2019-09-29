@@ -3,25 +3,25 @@
 *
 */
 let FormTemplate = function() {
-    this.input_text = '<input type="text" name="" value="{{value}}">';
+    this.start = '<div class=".stampjs_form">';
+    this.end = '</div>';
     
-    this.table_open =
-        '<table class="{{class}}"> \
-        <thead>';
+    this.table_open = '<table class="{{class}}"><thead>';
+    this.table_middle = '</thead><tbody>';
+    this.table_close = '</tbody></table>';
     
-    this.table_middle =
-        '</thead> \
-        <tbody>';
+    this.tr_open = '<tr>';
+    this.tr_close = '</tr>';
     
-    this.table_close =
-        '</tbody> \
-        </table>';
+    this.th = '<th>{{text}}</th>';
     
+    this.td_open = '<td>';
+    this.td_close = '</td>';
     
+    this.td_text = '<td><input type="text" name="{{name}}" value="{{value}}"></input></td>';
+    this.td_number = '<td><input type="number" name="{{name}}" value="{{value}}"></input></td>';
     
-    
-    
-    
+    this.input_radio = '<input type="radio" name="{{name}}" value="{{value}}" checked="{{checked}}">{{text}}</input>';
 };
 
 /**
