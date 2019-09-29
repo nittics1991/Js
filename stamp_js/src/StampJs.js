@@ -21,6 +21,3 @@ StampJs.prototype.render = function() {
     let render = factory.render(shapes);
     render.render(this.selector);
 };
-
-
-

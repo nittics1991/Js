@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"> 
+
+<style>
+
+
+canvas {
+	border:1px ridge #0000ff;
+}
+
+
+table {
+	
+}
+
+.setting-area th,td {
+	border: 1px ridge #cfcfcf;
+}
+
+</style>
+
+</head>
+<body>
+
+<div id="main">
+<div id="frame1" class="frame">
+	<h4>日付印</h4>
+	<div class="stamp-area">
+		<div id="date_stamp"></div>
+	</div>
+	<div class="setting-area">
+        
+		<table class="setting-full">
+			<thead>
+				<tr>
+					<th></th>
+					<th>設定</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="stamp-width">
+					<th>タイプ</th>
+					<td>
+						<input type="radio" name="frame1_option_position[]" value="date" checked>日付印</inpit>
+						<input type="radio" name="frame1_option_position[]" value="date" checked>認印</inpit>
+						<input type="radio" name="frame1_option_position[]" value="date" checked>角印</inpit>
+						<input type="radio" name="frame1_option_position[]" value="date" checked>会社印</inpit>
+					</td>
+				</tr>
+                
+				<tr class="stamp-width">
+					<th>保存</th>
+					<td>
+                        <button>保存</button>
+                        <button>消去</button>
+                        <button>ファイル保存</button>
+                        <button>ファイル読込</button>
+					</td>
+				</tr>
+                
+                
+                
+                
+                
+			</tbody>
+        </table>
+        
+		<table class="setting-full">
+			<thead>
+				<tr>
+					<th></th>
+					<th>全体</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="stamp-width">
+					<th>全体幅</th>
+					<td>
+						<input type="number" name="frame1_stamp_width" value="38"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="stamp-height">
+					<th>全体高</th>
+					<td>
+						<input type="number" name="frame1_stamp_height" value="38"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="line-weight">
+					<th>線幅</th>
+					<td>
+						<input type="number" name="frame1_line-weight" value="2"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="stamp-color">
+					<th>印影色</th>
+					<td>
+						<input type="radio" name="frame1_stamp_color[]" value="red" checked>赤</inpit>
+						<input type="radio" name="frame1_stamp_color[]" value="black">黒</inpit>
+					</td>
+				</tr>
+				
+				<tr class="option-position">
+					<th>追加情報</th>
+					<td>
+						<input type="radio" name="frame1_option_position[]" value="non" checked>無</inpit>
+						<input type="radio" name="frame1_option_position[]" value="left" disabled>左</inpit>
+						<input type="radio" name="frame1_option_position[]" value="right" disabled>右</inpit>
+						<input type="radio" name="frame1_option_position[]" value="top">上</inpit>
+						<input type="radio" name="frame1_option_position[]" value="bottom">下</inpit>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<table class="setting-parts">
+			<thead>
+				<tr>
+					<th></th>
+					<th>1段目</th>
+					<th>2段目</th>
+					<th>3段目</th>
+					<th>追加情報</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="stamp-text">
+					<th>表示文字</th>
+					<td>
+						<input type="text" name="frame1_stamp_text[1]"></inpit>
+					</td>
+					<td>
+						<input type="date" name="frame1_stamp_text[2]"></inpit>
+					</td>
+					<td>
+						<input type="text" name="frame1_stamp_text[3]"></inpit>
+					</td>
+					<td>
+						<input type="text" name="frame1_stamp_text[4]"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="font-family">
+					<th>フォント</th>
+					<td>
+						<select name="frame1_font_family[1]"></select>
+					</td>
+					<td>
+						<select name="frame1_font_family[2]"></select>
+					</td>
+					<td>
+						<select name="frame1_font_family[3]"></select>
+					</td>
+					<td>
+						<select name="frame1_font_family[4]"></select>
+					</td>
+				</tr>
+				
+				<tr class="font-size">
+					<th>サイズ</th>
+					<td>
+						<input type="number" name="frame1_font_size[1]" value="10"></inpit>
+					</td>
+					<td>
+						<input type="number" name="frame1_font_size[2]" value="10"></inpit>
+					</td>
+					<td>
+						<input type="number" name="frame1_font_size[3]" value="10"></inpit>
+					</td>
+					<td>
+						<input type="number" name="frame1_font_size[4]" value="10"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="text-align">
+					<th>横配置</th>
+					<td>
+						<select name="frame1_text_align[1]">
+							<option value="left">左</option>
+							<option value="center" selected>中央</option>
+							<option value="right">右</option>
+						</select>
+					</td>
+					<td>
+						<select name="frame1_text_align[2]">
+							<option value="left">左</option>
+							<option value="center" selected>中央</option>
+							<option value="right">右</option>
+						</select>
+					</td>
+					<td>
+						<select name="frame1_text_align[3]">
+							<option value="left">左</option>
+							<option value="center" selected>中央</option>
+							<option value="right">右</option>
+						</select>
+					</td>
+					<td>
+						<select name="frame1_text_align[4]">
+							<option value="left">左</option>
+							<option value="center">中央</option>
+							<option value="right" selected>右</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr class="vertical-align">
+					<th>縦配置</th>
+					<td>
+						<select name="frame1_vertical_align[1]">
+							<option value="top">上</option>
+							<option value="middle">中央</option>
+							<option value="bottom" selected>下</option>
+						</select>
+					</td>
+					<td>
+						<select name="frame1_vertical_align[2]">
+							<option value="top">上</option>
+							<option value="middle" selected>中央</option>
+							<option value="bottom">下</option>
+						</select>
+					</td>
+					<td>
+						<select name="frame1_vertical_align[3]">
+							<option value="top" selected>上</option>
+							<option value="middle">中央</option>
+							<option value="bottom">下</option>
+						</select>
+					</td>
+					<td>
+						<select name="frame1_vertical_align[4]">
+							<option value="top" selected>上</option>
+							<option value="middle">中央</option>
+							<option value="bottom">下</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr class="margin-size">
+					<th>マージン</th>
+					<td>
+						<input type="number" name="frame1_margin-size[1]" value="1"></inpit>
+					</td>
+					<td>
+						<input type="number" name="frame1_margin-size[2]" value="1"></inpit>
+					</td>
+					<td>
+						<input type="number" name="frame1_margin-size[3]" value="1"></inpit>
+					</td>
+					<td>
+						<input type="number" name="frame1_margin-size[4]" value="1"></inpit>
+					</td>
+				</tr>
+				
+			</tbody>
+		</table>
+	</div>
+</div>
+
+</div>
+
+<script src="../../src/form/FormTemplate.js"></script> 
+
+<script>
+
+let obj = new FormTemplate();
+
+//val = obj.get('input_text', {value:12345});
+val = obj.get('table_close', {});
+
+console.log(val);
+
+
+
+
+
+</script>
+	
+</body>
+</html>
