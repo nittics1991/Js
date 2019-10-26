@@ -38,6 +38,11 @@ FormTemplate.prototype.defineTemplate = function() {
         '</div>',
     ];
     
+    this.html_form = [
+        '<form name="{{name}}">',
+        '</form>',
+    ];
+    
     this.html_table = [
         '<table class="{{cls}}">',
         '</table>',
@@ -73,12 +78,18 @@ FormTemplate.prototype.defineTemplate = function() {
     ];
     
     this.html_option = [
-        '<option value="{{key}}">{{value}}</option>',
+        '<option value="{{key}}" {{selected}}>{{value}}</option>',
     ];
+    
     this.html_input_number = [
         '<input type="number" name="{{name}}" value="{{value}}"></inpit>',
     ];
+    
     this.html_input_radio = [
         '<input type="radio" name="{{name}}" value="{{value}}" {{checked}}>{{text}}</inpit>',
+    ];
+    
+    this.html_button = [
+        '<button name="{{name}}">{{text}}</button>',
     ];
 };
