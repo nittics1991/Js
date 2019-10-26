@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"> 
+
+<style>
+
+
+canvas {
+	border:1px ridge #0000ff;
+}
+
+<!-- -->
+
+.stampjs_form table {
+    border-collapse:collapse;
+}
+
+.stampjs_form th,td {
+	border: 1px ridge #cfcfcf;
+}
+
+
+
+
+</style>
+
+</head>
+<body>
+
+<div id="main">
+
+
+<div id="frame1" class="frame">
+	<h4>日付印</h4>
+	<div class="stamp-area">
+		<div id="date_stamp"></div>
+	</div>
+    
+    
+    
+    <!-- -->
+    
+	<div class="stampjs_form">
+		<table class="stampjs_frame">
+			<thead>
+				<tr>
+					<th></th>
+					<th>{{th_frame_title}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="stampjs_selector">
+					<th>{{td_stamp_types}}</th>
+					<td>
+						<select name="stamp_types">
+                            <option value="dateStamp">日付印</option>
+                            <option value="signetStamp">認印</option>
+                            <option value="squareStamp">角印</option>
+                            <option value="companyStamp">社印</option>
+                        </select>
+					</td>
+				</tr>
+                
+				<tr class="tr_stamp_width">
+					<th>{{td_stamp_width}}</th>
+					<td>
+						<input type="number" name="stamp_width" value="38"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="tr_stamp_height">
+					<th>{{td_stamp_height}}</th>
+					<td>
+						<input type="number" name="stamp_height" value="38"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="td_line_weight">
+					<th>{{td_line_weight}}</th>
+					<td>
+						<input type="number" name="line_weight" value="2"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="tr_stamp_colors">
+					<th>{{td_stamp_colors}}</th>
+					<td>
+						<input type="radio" name="stamp_colors[]" value="red" checked>赤</inpit>
+						<input type="radio" name="stamp_colors[]" value="black">黒</inpit>
+					</td>
+				</tr>
+				
+				<tr class="tr_option_positions">
+					<th>{{td_option_positions}}</th>
+					<td>
+						<input type="radio" name="option_positions[]" value="non" checked>無</inpit>
+						<input type="radio" name="option_positions[]" value="left" disabled>左</inpit>
+						<input type="radio" name="option_positions[]" value="right" disabled>右</inpit>
+						<input type="radio" name="option_positions[]" value="top">上</inpit>
+						<input type="radio" name="option_positions[]" value="bottom">下</inpit>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<table class="stampjs_data">
+			<thead>
+				<tr>
+					<th></th>
+					<th>th_data_title[0]</th>
+					<th>th_data_title[1]</th>
+					<th>th_data_title[2]</th>
+					<th>th_data_title[3]</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="tr_stamp_text">
+					<th>{{td_stamp_text}}</th>
+					<td>
+						<input type="text" name="stamp_text[1]"></inpit>
+					</td>
+					<td>
+						<input type="date" name="stamp_text[2]"></inpit>
+					</td>
+					<td>
+						<input type="text" name="stamp_text[3]"></inpit>
+					</td>
+					<td>
+						<input type="text" name="stamp_text[4]"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="tr_font_family">
+					<th>{{td_font_family}}</th>
+					<td>
+						<select name="font_family[1]"></select>
+					</td>
+					<td>
+						<select name="font_family[2]"></select>
+					</td>
+					<td>
+						<select name="font_family[3]"></select>
+					</td>
+					<td>
+						<select name="font_family[4]"></select>
+					</td>
+				</tr>
+				
+				<tr class="tr_font_size">
+					<th>{{td_font_size}}</th>
+					<td>
+						<input type="number" name="font_size[1]" value="10"></inpit>
+					</td>
+					<td>
+						<input type="number" name="font_size[2]" value="10"></inpit>
+					</td>
+					<td>
+						<input type="number" name="font_size[3]" value="10"></inpit>
+					</td>
+					<td>
+						<input type="number" name="font_size[4]" value="10"></inpit>
+					</td>
+				</tr>
+				
+				<tr class="tr_text_align">
+					<th>{{td_text_align}}</th>
+					<td>
+						<select name="text_align[1]">
+							<option value="left">左</option>
+							<option value="center" selected>中央</option>
+							<option value="right">右</option>
+						</select>
+					</td>
+					<td>
+						<select name="text_align[2]">
+							<option value="left">左</option>
+							<option value="center" selected>中央</option>
+							<option value="right">右</option>
+						</select>
+					</td>
+					<td>
+						<select name="text_align[3]">
+							<option value="left">左</option>
+							<option value="center" selected>中央</option>
+							<option value="right">右</option>
+						</select>
+					</td>
+					<td>
+						<select name="text_align[4]">
+							<option value="left">左</option>
+							<option value="center">中央</option>
+							<option value="right" selected>右</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr class="tr_vertical_align">
+					<th>{{td_vertical_align}}</th>
+					<td>
+						<select name="vertical_align[1]">
+							<option value="top">上</option>
+							<option value="middle">中央</option>
+							<option value="bottom" selected>下</option>
+						</select>
+					</td>
+					<td>
+						<select name="vertical_align[2]">
+							<option value="top">上</option>
+							<option value="middle" selected>中央</option>
+							<option value="bottom">下</option>
+						</select>
+					</td>
+					<td>
+						<select name="vertical_align[3]">
+							<option value="top" selected>上</option>
+							<option value="middle">中央</option>
+							<option value="bottom">下</option>
+						</select>
+					</td>
+					<td>
+						<select name="vertical_align[4]">
+							<option value="top" selected>上</option>
+							<option value="middle">中央</option>
+							<option value="bottom">下</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr class="tr_margin_size">
+					<th>{{td_margin_size}}</th>
+					<td>
+						<input type="number" name="margin_size[1]" value="1"></inpit>
+					</td>
+					<td>
+						<input type="number" name="margin_size[2]" value="1"></inpit>
+					</td>
+					<td>
+						<input type="number" name="margin_size[3]" value="1"></inpit>
+					</td>
+					<td>
+						<input type="number" name="margin_size[4]" value="1"></inpit>
+					</td>
+				</tr>
+				
+			</tbody>
+		</table>
+	</div>
+</div>
+
+</div>
+
+<script src="../src/StampFactory.js"></script> 
+<script src="../src/StampBuilder.js"></script> 
+
+<script src="../src/StampFrame.js"></script> 
+<script src="../src/StampData.js"></script>
+
+<script src="../src/HorizonText.js"></script> 
+<script src="../src/VerticalText.js"></script> 
+
+<script src="../src/CircleHorizonBorder.js"></script> 
+<script src="../src/CircleVerticalBorder.js"></script> 
+
+<script src="../src/RectHorizonBorder.js"></script> 
+<script src="../src/RectVerticalBorder.js"></script> 
+
+<script src="../src/HorizonPlacement.js"></script> 
+<script src="../src/VerticalPlacement.js"></script> 
+
+<script src="../src/OptionPosition.js"></script> 
+
+<script src="../src/RectStamp.js"></script> 
+<script src="../src/CircleStamp.js"></script> 
+
+<script src="../src/Shapes.js"></script> 
+<script src="../src/StampJs.js"></script> 
+ 
+<script src="../src/CanvasRender.js"></script> 
+
+<script>
+
+var data = {
+	type:null,
+	frame:{
+		stamp_type:'circle',
+		stamp_width:200,
+		stamp_height:200,
+		line_weight:3,
+		stamp_color:'red',
+		border_direction:'H',
+		text_placement:'V',
+		text_direction:'H',
+		option_position:'bottom',
+	},
+	data:[
+		{
+			stamp_text:'(営業1)M',
+			font_family:'',
+			font_size:30,
+			text_align:'center',
+			vertical_align:'bottom',
+			margin_size:0,
+		},
+		{
+			stamp_text:'2020/12/31',
+			font_family:'',
+			font_size:30,
+			text_align:'center',
+			vertical_align:'middle',
+			margin_size:0,
+		},
+		{
+			stamp_text:'青木 太郎',
+			font_family:null,
+			font_size:30,
+			text_align:'center',
+			vertical_align:'top',
+			margin_size:0,
+		},
+		{
+			stamp_text:'代',
+			font_family:null,
+			font_size:30,
+			text_align:'right',
+			vertical_align:'bottom',
+			margin_size:0,
+		},
+	],
+};
+
+window.addEventListener('load', function() {
+	let obj = new StampJs('#date_stamp', data);
+	obj.render();
+});
+
+</script>
+	
+</body>
+</html>

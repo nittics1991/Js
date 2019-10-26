@@ -1,0 +1,65 @@
+/**
+*   言語定義
+*
+*/
+FormLanguage:{
+    //StampFrame
+    stamp_types:{
+        signetStamp:'日付印',
+        dateStamp:'認印',
+        squareStamp:'角印',
+        companyStamp:'社印',
+    },
+    stamp_colors:{
+        red:'赤',
+        black:'黒',
+    },
+    border_directions:[
+        N:'無',
+        H:'水平',
+        V:'垂直',
+    },
+    text_placements:{
+        H:'水平',
+        V:'垂直',
+    },
+    text_directions:{
+        H:'横書',
+        V:'縦書',
+    },
+    option_positions:[
+        non:'無',
+        left:'左',
+        right:'右',
+        top:'上',
+        bottom:'下',
+    ],
+    
+    th_frame_title:'全体',
+    td_stamp_types:'種類',
+    td_stamp_width:'全体幅',
+    td_stamp_height:'全体高',
+    td_line_weight:'線幅',
+    td_stamp_colors:'印影色',
+    td_option_positions:'追加情報',
+    
+    //StampData
+    text_aligns:{
+        left:'左',
+        center:'中央',
+        right:'右'
+    },
+    vertical_aligns:{
+        top:'上',
+        middle:'中央',
+        bottom:'下'
+    },
+    
+    th_data_title:['1段目', '2段目', '3段目', '追加情報'],
+    td_stamp_text:'表示文字',
+    td_font_family:'フォント',
+    td_font_size:'サイズ',
+    td_text_align:'横配置',
+    td_vertical_align:'縦配置',
+    td_margin_size:'マージン',
+};
