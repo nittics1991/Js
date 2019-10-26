@@ -33,9 +33,43 @@ FormTemplate.prototype.get = function(id, params = {}) {
 *   @return string
 */
 FormTemplate.prototype.defineTemplate = function() {
-    //どうするopen/close
+    this.html_div = [
+        '<div class="{{cls}}">',
+        '</div>',
+    ];
+    
+    this.html_table = [
+        '<table class="{{cls}}">',
+        '</table>',
+    ];
+    
+    this.html_thead = [
+        '<thead>',
+        '</thead>',
+    ];
+    
+    this.html_tbody = [
+        '<tbody>',
+        '</tbody>',
+    ];
+    
+    this.html_tr = [
+        '<tr class="{{cls}}">',
+        '</tr>',
+    ];
+    
+    this.html_th = [
+        '<th>{{text}}</th>',
+    ];
+    
+    this.html_td = [
+        '<td>',
+        '</td>',
+    ];
+    
     this.html_select_open = [
         '<select name="{{name}}">',
+        '</select>',
     ];
     
     this.html_option = [
@@ -47,11 +81,4 @@ FormTemplate.prototype.defineTemplate = function() {
     this.html_input_radio = [
         '<input type="radio" name="{{name}}" value="{{value}}" {{checked}}>{{text}}</inpit>',
     ];
-    
-    
-    
-    
-    
-    
-    
 };
