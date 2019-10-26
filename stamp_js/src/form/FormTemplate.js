@@ -67,7 +67,7 @@ FormTemplate.prototype.defineTemplate = function() {
         '</td>',
     ];
     
-    this.html_select_open = [
+    this.html_select = [
         '<select name="{{name}}">',
         '</select>',
     ];
