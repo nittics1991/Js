@@ -16,47 +16,50 @@ let TemplateParser = {
     _close_tags = ['hr', 'br'],
     
     build:function(definiton) {
+        let _elements = [];
+        let _pos = 0;
+        let _elements = null;
+        
         if (!TemplateParser._isArray(definiton)) {
-            _this._throwError(def);
-        }
-        
-        let _this = this;
-        
-        let _elements = definiton.map(function(def, index, arr) {
-            let _result = null;
+            TemplateParser._throwError(def);
+        //TAG
+        } else if (TemplateParser._isString(definiton[0])
+            && TemplateParser._isObject(definiton[1])
+        ) {
             
-            //TAG作成
-            if (TemplateParser._isString(def)) {
+            let _attributes = definiton[1];
+            _result = _definiton.keys.map(function(key) {
                 
                 
                 
                 
                 
-                
-                
-                
-            //子Element作成
-            } else if (TemplateParser._isArray(def)) {
-                _result = TemplateParser.build(def);
-                if (! TemplateParser._isString(def)) {
-                    _this._throwError(def);
-                }
-                return _result;
-            //
-            } else if (TemplateParser._isFunction(def)) {
-                
-                
-                
-                
-                _result = def.apply(
-                if (! TemplateParser._isString(def)) {
-                    _this._throwError(def);
-                }
-                return _result;
-            } else {
-                _this._throwError(def);
+            });
+            
+            
+            
+        //子Elements
+        } else if (TemplateParser._isArray(definiton[0])
+            _result = TemplateParser.build(def);
+            if (! TemplateParser._isString(_result)) {
+                TemplateParser._throwError(def);
             }
-        });
+            _elements = _elements.splice(_pos, 0, _result);
+        //関数
+        } else if (TemplateParser._isFunction(definiton[0])
+            && TemplateParser._isArray(definiton[1])
+        ) {
+            _result = definiton[0].apply(
+                definiton[2] || this,
+                definiton[1]
+            );
+            if (! TemplateParser._isString(_result)) {
+                TemplateParser._throwError(def);
+            }
+            _elements = _elements.splice(_pos, 0, _result);
+        } else {
+            TemplateParser._throwError(def);
+        }
         return _elements.join("\n");
     },
     
