@@ -13,12 +13,14 @@
 *   ]
 */
 let TemplateParser = {
-    _close_tags = ['hr', 'br'],
+    _non_close_tags = ['hr', 'br'],
     
     build:function(definiton) {
+        let _this = this;
         let _elements = [];
         let _pos = 0;
-        let _elements = null;
+        let _result = null;
+        let _attributes = [];
         
         if (!TemplateParser._isArray(definiton)) {
             TemplateParser._throwError(def);
@@ -27,17 +29,21 @@ let TemplateParser = {
             && TemplateParser._isObject(definiton[1])
         ) {
             
-            let _attributes = definiton[1];
-            _result = _definiton.keys.map(function(key) {
-                
-                
-                
-                
-                
+            _attributes = definiton[1].keys.map(function(key) {
+                return key + '="' +  definiton[1][key] + '"';
             });
             
+            _result = '<' + definiton[0] +
+                ' ' +
+                _attributes.join(' ') +
+                '>';
             
+            _elements.push(_result);
+            _pos++;
             
+            if (this._non_close_tags.indexOf(key) !== -1) {
+                _elements.push('</' + definiton[0] + '>');
+            }
         //子Elements
         } else if (TemplateParser._isArray(definiton[0])
             _result = TemplateParser.build(def);
