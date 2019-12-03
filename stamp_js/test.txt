@@ -1,0 +1,24 @@
+
+●canvasをユーザが取得するのにブラウザによって違う
+
+ie  不可
+edge    不可
+chrome  コピー可能
+firefox 保存可能
+
+win10はスクリーンショットが取れる
+    win+shift+s
+
+
+==>canvasをpngに変換する
+
+
+●uploadのhtmlを外部ファイル化
+    ajaxでhtml読込
+    elemにapend
+    
+    
+
+
+
+
