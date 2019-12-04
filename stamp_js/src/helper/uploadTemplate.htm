@@ -1,0 +1,35 @@
+<style>
+#stampjs-upload {
+    width:20rem;
+    height:5rem;
+    border:solid 1px #000000;
+    background-color:#f0f0f0;
+    
+    position: absolute;
+    top:50%;
+    left:50%;
+    z-index:999;
+    margin:-3rem 0 0 -10rem;
+}
+
+#stampjs-upload > div:first-child {
+    border:solod 1px #000000;
+    background-color:#c0c0c0;
+}
+
+#stampjs-upload > div:nth-child(3) {
+    display:flex;
+    justify-content:center;
+}
+</style>
+
+<div id="stampjs-upload">
+    <div>Upload</div>
+    <div>
+        <input type="file">
+    </div>
+    <div>
+        <button type="button" name="ok">OK</button>
+        <button type="button" name="cancel">Cancel</button>
+    </div>
+</div>

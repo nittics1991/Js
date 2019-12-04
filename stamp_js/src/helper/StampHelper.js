@@ -74,20 +74,31 @@ let StampHelper =  {
     
     
     
-    
-    
+    //ファイル名から読み込みたい
     
     /**
-    *   ファイルアップロード
+    *   templateファイルから要素追加
     *
     *   @param string templateTagSelector
+    *   @param string position  @see insertAdjacentHTML
+    *   @param Blob blob
     */
-    openUploadFile:function(templateTagSelector) {
+    addElementFromTemplateFile:function(targetSelector, position, blob) {
         
         
+        console.log(blob);
         
         
+        let reader = new FileReader();
+        reader.readAsText(blob);
         
+        let _position = position;
+        let _targetSelector = targetSelector;
+        
+        reader.addEventListener('load', function() {
+            document.querySelector(targetSelector)
+                .insertAdjacentHTML(position, reader.result);
+        });
     },
     
     
