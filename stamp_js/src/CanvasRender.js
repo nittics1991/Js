@@ -48,6 +48,8 @@ CanvasRender.prototype._renderShape = function(canvas) {
     let _this = this;
     this.ctx = canvas.getContext('2d');
 
+    this._renderBackground();
+
     this._shapes.data.forEach(function(data) {
         if (data.func == 'circle') {
             _this._drawCircle(data.args);
@@ -80,6 +82,24 @@ CanvasRender.prototype._renderShape = function(canvas) {
             _this._setVirticalAlign(data.args);
         }
     });
+};
+
+/**
+*   _setLineWeight
+*
+*   @param array data
+*/
+CanvasRender.prototype._renderBackground = function() {
+    if (this._shapes.canvas.backgroound_color == 'transparent') {
+        return;
+    }
+    this.ctx.fillStyle = this._shapes.canvas.backgroound_color;
+    this.ctx.fillRect(
+        0,
+        0,
+        this._shapes.canvas.canvas_width,
+        this._shapes.canvas.canvas_height
+    );
 };
 
 /**

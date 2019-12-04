@@ -1,5 +1,5 @@
 /**
-*   スタンプ文字データ
+*   スタンプ枠データ
 *
 *   @param Object dataset
 */
@@ -52,6 +52,9 @@ StampFrame.prototype._init = function(dataset) {
 
     this.option_position = typeof dataset.option_position !== 'undefined'?
         dataset.option_position:'non';
+        
+    this.backgroound_color = typeof dataset.backgroound_color !== 'undefined'?
+        dataset.backgroound_color:'transparent';
 };
 
 /**
@@ -85,7 +88,10 @@ StampFrame.prototype.validate = function() {
 
     if (this.option_positions.indexOf(this.option_position) === -1)
         return false;
-
+    
+    if (this.backgroound_color.trim() === '')
+        return false;
+    
     return true;
 };
 

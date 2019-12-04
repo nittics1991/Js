@@ -14,6 +14,7 @@ var dataset = {
 		text_placement:'H',
 		text_direction:'V',
 		option_position:'bottom',
+        backgroound_color:'white',
 	},
 	data:[
 		{
@@ -62,6 +63,7 @@ var dataset = {
 		text_placement:'H',     //H|V
 		text_direction:'V', //H|V    
 		option_position:'non',  //non|left|right|top|bottom
+        backgroound_color:'white',  //@see CSS font-family|transparent
 	},
 	data:[
 		{

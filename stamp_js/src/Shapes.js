@@ -69,6 +69,7 @@ Shapes.prototype._calcCanvas = function() {
     this.canvas.canvas_width = this._calcCanvasWidth();
     this.canvas.canvas_height = this._calcCanvasHeight();
     this.base_position = this._calcBasePosition();
+    this.canvas.backgroound_color = this._stampFrame.backgroound_color;
 };
 
 /**

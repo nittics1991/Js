@@ -32,9 +32,6 @@ table {
 	</div>
 </div>
 
-<button name="canvasToImage">toImage</button>
-<button name="exchangeImage">exchange</button>
-
 </div>
 
 <script src="../src/StampFactory.js"></script> 
@@ -65,8 +62,6 @@ table {
  
 <script src="../src/CanvasRender.js"></script> 
 
-<script src="../src/helper/StampHelper.js"></script> 
-
 <script>
 
 var data = {
@@ -81,7 +76,7 @@ var data = {
 		text_placement:'H',
 		text_direction:'V',
 		option_position:'non',
-        backgroound_color:'white',
+        backgroound_color:'yellow',
 	},
 	data:[
 		{
@@ -107,26 +102,6 @@ window.addEventListener('load', function() {
 	let obj = new StampJs('#date_stamp', data);
 	obj.render();
 });
-
-
-/////////////////////////////////////
-
-document.querySelector('button[name="canvasToImage"]')
-    .addEventListener('click', function(event) {
-        let imgUri = StampHelper.canvasToImage('canvas');
-        let html = '<img src="' + imgUri + '">';
-        
-        let elm = document.querySelector('#date_stamp');
-        elm.insertAdjacentHTML('afterbegin', html);
-        
-        document.querySelector('canvas')
-            .remove();
-    });
-
-document.querySelector('button[name="exchangeImage"]')
-    .addEventListener('click', function(event) {
-        let imgUri = StampHelper.exchangeToImage('canvas');
-    });
 
 </script>
 	
