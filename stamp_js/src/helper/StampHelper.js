@@ -45,20 +45,36 @@ let StampHelper =  {
     },
     
     /**
-    *   canvas => img
+    *   canvas => png変換
     *
     *   @param string canvasSelector
     *   @return text dataUri
     */
-    canvasToImage:function(canvasSelector, ncoderOptions) {
+    canvasToImage:function(canvasSelector) {
         let canvas = document.querySelector(canvasSelector);
-        
         return canvas.toDataURL();
-        
-        
-        // ncoderOptions = ncoderOptions == null? []:ncoderOptions;
-        // return canvas.toDataURL.apply(this, ncoderOptions);
     },
+    
+    /**
+    *   canvas => png変換
+    *
+    *   @param string canvasSelector
+    *   @return text dataUri
+    */
+    exchangeToImage:function(canvasSelector) {
+        let canvas = document.querySelector(canvasSelector);
+        let imgUri = StampHelper.canvasToImage(canvasSelector);
+        let html = '<img src="' + imgUri + '">';
+        
+        canvas.parentNode.insertAdjacentHTML('afterbegin', html);
+        canvas.remove();
+    },
+    
+    
+    
+    
+    
+    
     
     
     /**

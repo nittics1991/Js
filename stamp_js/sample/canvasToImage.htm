@@ -33,7 +33,7 @@ table {
 </div>
 
 <button name="canvasToImage">toImage</button>
-
+<button name="exchangeImage">exchange</button>
 
 </div>
 
@@ -112,20 +112,20 @@ window.addEventListener('load', function() {
 
 document.querySelector('button[name="canvasToImage"]')
     .addEventListener('click', function(event) {
-        let img = StampHelper.canvasToImage('canvas');
+        let imgUri = StampHelper.canvasToImage('canvas');
+        let html = '<img src="' + imgUri + '">';
         
-        let parent = document.querySelector('#date_stamp')
-        let element = document.createElement('img')
+        let elm = document.querySelector('#date_stamp');
+        elm.insertAdjacentHTML('afterbegin', html);
         
-            elm.appendChild('img')
-            .src = img;
+        document.querySelector('canvas')
+            .remove();
     });
 
-
-
-
-
-
+document.querySelector('button[name="exchangeImage"]')
+    .addEventListener('click', function(event) {
+        let imgUri = StampHelper.exchangeToImage('canvas');
+    });
 
 </script>
 	
