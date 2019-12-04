@@ -67,7 +67,7 @@ let StampHelper =  {
         let html = '<img src="' + imgUri + '">';
         
         canvas.parentNode.insertAdjacentHTML('afterbegin', html);
-        canvas.remove();
+        canvas.parentNode.removeChild(canvas);
     },
     
     
