@@ -56,7 +56,7 @@ let StampHelper =  {
     },
     
     /**
-    *   canvas => png変換
+    *   canvas要素=>img要素置換
     *
     *   @param string canvasSelector
     *   @return text dataUri
