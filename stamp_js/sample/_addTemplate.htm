@@ -34,7 +34,7 @@ table {
 
 <div id="add-template"></div>
 
-<input type="file">
+<button type="button">add</button>
 
 </div>
 
@@ -106,18 +106,18 @@ var data = {
 
 window.addEventListener('load', function() {
 	let obj = new StampJs('#date_stamp', data);
-	obj.render();
+	//obj.render();
 });
 
 
 /////////////////////////////////////
 
-document.querySelector('input[type="file"]')
-    .addEventListener('change', function(event) {
+document.querySelector('button')
+    .addEventListener('click', function(event) {
         StampHelper.addElementFromTemplateFile(
             '#add-template',
             'afterbegin',
-            event.target.files[0]
+            '../src/helper/uploadTemplate.htm'
         );
     });
 

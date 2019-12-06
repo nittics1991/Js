@@ -81,24 +81,32 @@ let StampHelper =  {
     *
     *   @param string templateTagSelector
     *   @param string position  @see insertAdjacentHTML
-    *   @param Blob blob
+    *   @param string filePath
     */
-    addElementFromTemplateFile:function(targetSelector, position, blob) {
+    addElementFromTemplateFile:function(targetSelector, position, filePath) {
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', filePath);
         
+        let contents = '';
         
-        console.log(blob);
-        
-        
-        let reader = new FileReader();
-        reader.readAsText(blob);
-        
-        let _position = position;
-        let _targetSelector = targetSelector;
-        
-        reader.addEventListener('load', function() {
-            document.querySelector(targetSelector)
-                .insertAdjacentHTML(position, reader.result);
-        });
+        xhr.onreadystatechange = function() {
+            if(xhr.readyStatus === 4 && xhr.status == 200) {
+                contents = xhr.responseText;
+                
+                
+                console.log(contents);
+                console.log(document);
+                console.log(targetSelector);
+                console.log(position);
+                
+                document.querySelector(targetSelector)
+                    .insertAdjacentHTML(position, contents);
+                
+                
+                
+            }
+        };
+        xhr.send();
     },
     
     
