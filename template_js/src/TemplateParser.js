@@ -90,3 +90,5 @@ let TemplateParser = {
             + JSON.stringify(val);
     },
 };
+
+module.exports = TemplateParser;
