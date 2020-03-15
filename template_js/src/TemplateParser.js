@@ -13,7 +13,7 @@
 *   ]
 */
 let TemplateParser = {
-    _non_close_tags = ['hr', 'br'],
+    _non_close_tags: ['hr', 'br'],
     
     build:function(definiton) {
         let _this = this;
@@ -45,7 +45,7 @@ let TemplateParser = {
                 _elements.push('</' + definiton[0] + '>');
             }
         //子Elements
-        } else if (TemplateParser._isArray(definiton[0])
+        } else if (TemplateParser._isArray(definiton[0])) {
             _result = TemplateParser.build(def);
             if (! TemplateParser._isString(_result)) {
                 TemplateParser._throwError(def);
