@@ -2,10 +2,15 @@
   "name": "template_js",
   "version": "1.0.0",
   "description": "",
+  "author": "nittics1991",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "jest": "^25.1.0"
+  },
   "main": "index.js",
   "scripts": {
+    "lint": "$HOME/.local/node_modules_global/bin/eslint src/",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "nittics1991",
-  "license": "MIT"
+  }
 }
