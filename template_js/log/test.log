@@ -1,8 +1,69 @@
-No tests found, exiting with code 1
-Run with `--passWithNoTests` to exit with code 0
-In /home/user/document/src/Js/template_js
-  5 files checked.
-  testMatch: **/__tests__/**/*.[jt]s?(x), **/?(*.)+(spec|test).[tj]s?(x) - 0 matches
-  testPathIgnorePatterns: /node_modules/ - 5 matches
-  testRegex:  - 0 matches
-Pattern: test/ - 0 matches
+FAIL test/TestTemplateParser.js
+  ● Test suite failed to run
+
+    SyntaxError: /home/user/document/src/Js/template_js/test/TestTemplateParser.js: Unexpected token, expected "," (10:5)
+
+       8 |        
+       9 |        expect(result).tBe(0);
+    > 10 |     };
+         |      ^
+      11 | });
+      12 | 
+      13 |
+
+      at Parser._raise (node_modules/@babel/parser/src/parser/location.js:233:45)
+      at Parser.raiseWithData (node_modules/@babel/parser/src/parser/location.js:228:17)
+      at Parser.raise (node_modules/@babel/parser/src/parser/location.js:212:17)
+      at Parser.unexpected (node_modules/@babel/parser/src/parser/util.js:149:16)
+      at Parser.expect (node_modules/@babel/parser/src/parser/util.js:129:28)
+      at Parser.parseCallExpressionArguments (node_modules/@babel/parser/src/parser/expression.js:793:14)
+      at Parser.parseSubscript (node_modules/@babel/parser/src/parser/expression.js:655:31)
+      at Parser.parseSubscripts (node_modules/@babel/parser/src/parser/expression.js:563:19)
+      at Parser.parseExprSubscripts (node_modules/@babel/parser/src/parser/expression.js:548:17)
+      at Parser.parseMaybeUnary (node_modules/@babel/parser/src/parser/expression.js:519:21)
+
+FAIL test/sample.test.js
+  ● Test suite failed to run
+
+    Jest encountered an unexpected token
+
+    This usually means that you are trying to import a file which Jest cannot parse, e.g. it's not plain JavaScript.
+
+    By default, if Jest sees a Babel config, it will use that to transform your files, ignoring "node_modules".
+
+    Here's what you can do:
+     • To have some of your "node_modules" files transformed, you can specify a custom "transformIgnorePatterns" in your config.
+     • If you need a custom transformation specify a "transform" option in your config.
+     • If you simply want to mock your non-JS modules (e.g. binary assets) you can stub them out with the "moduleNameMapper" config option.
+
+    You'll find more details and examples of these config options in the docs:
+    https://jestjs.io/docs/en/configuration.html
+
+    Details:
+
+    SyntaxError: /home/user/document/src/Js/template_js/test/sample.test.js: Unexpected token (3:19)
+
+      1 | let SampleClass = require('../src/Sample.js');
+      2 | 
+    > 3 | describe('初期テスト', () = {
+        |                    ^
+      4 |     it('整数', () => {
+      5 |         let obj = new SampleClass();
+      6 |
+
+      at Parser._raise (node_modules/@babel/parser/src/parser/location.js:233:45)
+      at Parser.raiseWithData (node_modules/@babel/parser/src/parser/location.js:228:17)
+      at Parser.raise (node_modules/@babel/parser/src/parser/location.js:212:17)
+      at Parser.unexpected (node_modules/@babel/parser/src/parser/util.js:149:16)
+      at Parser.parseParenAndDistinguishExpression (node_modules/@babel/parser/src/parser/expression.js:1318:12)
+      at Parser.parseExprAtom (node_modules/@babel/parser/src/parser/expression.js:1019:21)
+      at Parser.parseExprSubscripts (node_modules/@babel/parser/src/parser/expression.js:539:23)
+      at Parser.parseMaybeUnary (node_modules/@babel/parser/src/parser/expression.js:519:21)
+      at Parser.parseExprOps (node_modules/@babel/parser/src/parser/expression.js:311:23)
+      at Parser.parseMaybeConditional (node_modules/@babel/parser/src/parser/expression.js:263:23)
+
+Test Suites: 2 failed, 2 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        21.771s
+Ran all test suites matching /test\//i.

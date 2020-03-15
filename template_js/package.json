@@ -12,5 +12,9 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint --fix src/ > log/lint.log 2>&1",
     "test": "./node_modules/.bin/jest test/ > log/test.log 2>&1"
+  },
+  "jest": {
+    "verbose": true,
+    "testRegex": "/test/.+\\.js$"
   }
 }
