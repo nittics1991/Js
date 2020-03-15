@@ -10,7 +10,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "lint": "$HOME/.local/node_modules_global/bin/eslint src/",
+    "lint": "$HOME/.local/node_modules_global/bin/eslint --fix src/ > log/lint.log 2>&1",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
