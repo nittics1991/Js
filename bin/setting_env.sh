@@ -4,7 +4,7 @@ set -e
 
 cd $(dirname "$0")
 
-sudo apt install nodejs npm
+#sudo apt install nodejs npm
 
 cp ../.npmrc $HOME
 

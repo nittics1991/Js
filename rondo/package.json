@@ -1,0 +1,20 @@
+{
+  "name": "rondo",
+  "version": "1.0.0",
+  "description": "",
+  "author": "nittics1991",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "jest": "^25.1.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint --fix src/ > log/lint.log 2>&1",
+    "test": "./node_modules/.bin/jest test/"
+  },
+  "jest": {
+    "verbose": true,
+    "testRegex": "/test/.+\\.js$"
+  }
+}
