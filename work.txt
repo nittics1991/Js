@@ -6,6 +6,8 @@
     sample
         https://tech.bitbank.cc/lets-test-by-jest/
         
-
+200321
+    ユーティリティ調査開始
+    https://qiita.com/amamamaou/items/ef0b797156b324bb4ef3
 
 
