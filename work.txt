@@ -16,8 +16,13 @@
     riotjs
         test1.htm実行もfile://ではerror
 
-
-
+200328
+    ライブラリサイト
+        jQuery Script net
+        https://www.jqueryscript.net/
         
+        htmldrive
+        http://www.htmldrive.net/
         
-
+    ショートハンド
+        https://www.webprofessional.jp/shorthand-javascript-techniques/
