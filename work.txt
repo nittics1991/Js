@@ -13,6 +13,8 @@
 200328
     layout
         node-sassでコンパイルエラー
+    riotjs
+        test1.htm実行もfile://ではerror
 
 
 
