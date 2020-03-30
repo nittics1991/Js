@@ -1,0 +1,9 @@
+ライブラリサイト
+    jQuery Script net
+    https://www.jqueryscript.net/
+    
+    htmldrive
+    http://www.htmldrive.net/
+    
+ショートハンド
+    https://www.webprofessional.jp/shorthand-javascript-techniques/

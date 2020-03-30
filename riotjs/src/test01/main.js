@@ -1,4 +1,4 @@
-import * as riot from '../../node_modules/riot/riot+compiler.js'
+//import * as riot from '../../node_modules/riot/riot+compiler.js'
 import App from './app.riot'
 
 const mountApp = riot.component(App)

@@ -1,28 +1,14 @@
-200315
-    template_jsでnodejs&testのテスト
-    jestでのテスト作成の勉強中
-    
-    
-    sample
-        https://tech.bitbank.cc/lets-test-by-jest/
-        
-200321
-    ユーティリティ調査開始
-    https://qiita.com/amamamaou/items/ef0b797156b324bb4ef3
+layout
+    node-sassでコンパイルエラー
 
-200328
-    layout
-        node-sassでコンパイルエラー
-    riotjs
-        test1.htm実行もfile://ではerror
+riotjs
+        npx http-server --cors 実行も module 読み込みエラー
 
-200328
-    ライブラリサイト
-        jQuery Script net
-        https://www.jqueryscript.net/
+template_js
+    200315
+        template_jsでnodejs&testのテスト
+        jestでのテスト作成の勉強中
+    
+        sample
+            https://tech.bitbank.cc/lets-test-by-jest/
         
-        htmldrive
-        http://www.htmldrive.net/
-        
-    ショートハンド
-        https://www.webprofessional.jp/shorthand-javascript-techniques/
