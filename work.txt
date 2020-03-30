@@ -3,6 +3,8 @@ layout
 
 rondo
     npx eslint "object-shorthand": ["error", "always"]エラー
+    eslint uninstall
+    jest test ES6 error
 
 riotjs
         npx http-server --cors 実行も module 読み込みエラー

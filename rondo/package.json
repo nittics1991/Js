@@ -5,7 +5,6 @@
   "author": "nittics1991",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^6.8.0",
     "jest": "^25.1.0"
   },
   "main": "index.js",
