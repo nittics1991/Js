@@ -1,6 +1,9 @@
 layout
     node-sassでコンパイルエラー
 
+rondo
+    npx eslint "object-shorthand": ["error", "always"]エラー
+
 riotjs
         npx http-server --cors 実行も module 読み込みエラー
 

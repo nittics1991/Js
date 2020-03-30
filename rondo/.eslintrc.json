@@ -1,0 +1,15 @@
+{
+    "extends": ["eslint:recommended"],
+    "plugins": [],
+    "parserOptions": {},
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "globals": {},
+    "rules": {
+        "object-shorthand": ["error", "always"]
+    }
+    
+    
+}
