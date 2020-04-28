@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>Riot App</title>
+</head>
+<body>
+    <greet></greet>
+  
+    <script src="https://cdn.jsdelivr.net/npm/riot@4.12.1/riot+compiler.min.js"></script>
+    <script type="riot/tag">
+        <greet>
+            <h1>{word}</h1>
+            
+            this.word = 'Hello World'
+        </greet>
+    </script>
+
+    <script>
+        riot.mount('greet')
+    </script>
+</body>
+</html>
