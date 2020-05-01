@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>Riot App</title>
+</head>
+<body>
+    <my-tag></my-tag>
+    <greet></greet>
+
+   <!-- これはOKとなる -->
+<!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/riot/2.5.0/riot+compiler.min.js"></script>
+-->
+  
+<!--
+    <script src="https://cdn.jsdelivr.net/npm/riot@4.12.1/riot+compiler.min.js"></script>
+-->
+
+<!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/riot/4.6.6/riot+compiler.min.js"></script>
+-->
+
+   
+    
+    
+<!--
+    <script src="./my-tag.riot" type="riot"></script>
+-->
+    
+    <script src="./greet.riot" type="riot"></script>
+    
+    
+    
+    <script src="./riot+compiler.min.js"></script>
+   
+
+
+    <script>
+    (async function main() {
+      await riot.compile()
+
+      //riot.mount('my-tag')
+      riot.mount('greet')
+      
+    }())
+    </script>
+
+
+
+</body>
+</html>

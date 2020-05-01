@@ -7,7 +7,17 @@ rondo
     jest test ES6 error
 
 riotjs
-        npx http-server --cors 実行も module 読み込みエラー
+    
+    src/test01/test02.htm riot2.5ではOK
+    
+    src/test01/test02.htm riot4.6ではNG
+    
+    
+    python3 http.server 8080で
+    exapmles/tod-app はOK
+    
+    
+    
 
 template_js
     200315
