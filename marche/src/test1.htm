@@ -13,10 +13,14 @@
 
 (function() {
 
+var Marche = Marche || {};
+
+
+//不要?
 /**
 *   EventDispatcher
 */
-class EventDispatcher {
+class Marche.EventDispatcher {
     /**
     *   @var array
     */
@@ -77,11 +81,10 @@ class EventDispatcher {
     }
 }
 
-//EventDispatcherをinjectionしたいが
 /**
 *   Repository
 */
-class Repository {
+class Marche.Repository {
     /**
     *   @var object
     */
@@ -113,31 +116,50 @@ class Repository {
     }
     
     /**
-    *   get
+    *   find
     *
     *   @param string name
     *   @return mixed
-    *   @throws Error
     */
-    get(name) {
-        if (this.has(name)) {
-            return JSON.parse(
-                this.#storage.getItem(name)
-            );
+    find(name) {
+        if (!this.has(name)) {
+            return null;
         }
-        throw new Error(
-            'data not found. name='
+        
+        return JSON.parse(
+            this.#storage.getItem(name)
         );
     }
     
     /**
-    *   set
+    *   findAll
+    *
+    *   @return mixed[]
+    */
+    findAll() {
+        let results = [];
+        
+        for (let i = 0; i < this.#storage.length; i++) {
+            results.push(
+                JSON.parse(
+                    this.#storage.getItem(
+                        this.#storage.key(i)
+                    )
+                )
+            );
+        }
+        
+        return results;
+    }
+    
+    /**
+    *   save
     *
     *   @param string name
     *   @param mixed value
     *   @return this
     */
-    set(name, value) {
+    save(name, value) {
         this.#storage.getItem(
             name,
             JSON.stringify(value)

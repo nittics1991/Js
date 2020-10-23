@@ -25,4 +25,9 @@
 
 
 
+##メモ
+
+- storageはStorageEventを持っている
+
+
 
