@@ -44,19 +44,18 @@ class Repository {
     /**
     *   findAll
     *
-    *   @return mixed[]
+    *   @return object
     */
     findAll() {
-        let results = [];
+        let results = {};
         
         for (let i = 0; i < this._storage.length; i++) {
-            results.push(
+            results[this._storage.key(i)] =
                 JSON.parse(
                     this._storage.getItem(
                         this._storage.key(i)
                     )
-                )
-            );
+                );
         }
         
         return results;
@@ -70,7 +69,7 @@ class Repository {
     *   @return this
     */
     save(name, value) {
-        this._storage.getItem(
+        this._storage.setItem(
             name,
             JSON.stringify(value)
         );

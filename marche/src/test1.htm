@@ -16,17 +16,91 @@
 
 let repo = new Repository();
 
-let data = {
+let data1 = {
     ar: new Array(1,2,3,4),
     dt: new Date(),
-    
-    
+};
+
+let data2 = {
+    ar: new Array(11,12,13,14),
+    dt: new Date(),
+    str: "data2",
 };
 
 
-let val = repo.has('aaa');
 
+
+let val;
+
+//no data
+console.log("--no data");
+
+val = repo.has('aaa');
 console.log(val);
+
+val = repo.find('aaa');
+console.log(val);
+
+val = repo.findAll();
+console.log(val);
+
+//save
+console.log("--saved");
+
+repo.save('aaa', data1);
+
+val = repo.has('aaa');
+console.log(val);
+
+val = repo.find('aaa');
+console.log(val);
+
+val = repo.findAll();
+console.log(val);
+
+
+//save2
+console.log("--save");
+
+repo.save('bbb', data2);
+
+val = repo.has('bbb');
+console.log(val);
+
+val = repo.find('bbb');
+console.log(val);
+
+val = repo.findAll();
+console.log(val);
+
+//remove
+console.log("--remove");
+
+repo.remove('aaa');
+
+val = repo.has('aaa');
+console.log(val);
+
+val = repo.find('aaa');
+console.log(val);
+
+val = repo.findAll();
+console.log(val);
+
+//clear
+console.log("--clear");
+
+repo.clear();
+
+val = repo.has('bbb');
+console.log(val);
+
+val = repo.find('bbb');
+console.log(val);
+
+val = repo.findAll();
+console.log(val);
+
 
 
 
