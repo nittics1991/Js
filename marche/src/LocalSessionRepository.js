@@ -1,7 +1,7 @@
 /**
-*   Repository
+*   LocalSessionRepository
 */
-class Repository {
+class LocalSessionRepository {
     /**
     *   @var object
     */
