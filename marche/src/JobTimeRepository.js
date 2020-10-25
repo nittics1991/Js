@@ -3,14 +3,34 @@
 */
 class JobTimeRepository extends LocalSessionRepository{
     /**
+    *   @val
+    */
+    const _NAMESPACE = 'jobtime';
+    
+    /**
+    *   constructor
+    *
+    */
+    constructor() {
+        super();
+    }
+    
+    /**
     *   timecard
     *
     *   @param ?string date_string
-    *   @return XXX
+    *   @return ?JobTime
     */
     timecard(date_string) {
+       let jobtimes = this.find(this._NAMESPACE);
        
+       if (jobtimes === null
+        || ! jobtimes instanceof Map
+       ) {
+           return null;
+       }
        
+       jobtimes
        
        
        
@@ -44,7 +64,7 @@ class JobTimeRepository extends LocalSessionRepository{
     *   totalList
     *
     *   @param string date_string
-    *   @return XXX[]
+    *   @return JobTime[]
     */
     totalList(date_string) {
        
@@ -56,6 +76,15 @@ class JobTimeRepository extends LocalSessionRepository{
     *   @return string[]
     */
     jobList() {
+       
+    }
+    
+    /**
+    *   jobList
+    *
+    *   @return string[]
+    */
+    _find() {
        
     }
 }

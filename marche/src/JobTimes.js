@@ -1,30 +1,31 @@
 /**
-*   JobTime
+*   JobTimes
 */
 class JobTime {
-    /**
-    *   @var string
-    */
-    _job_name;
+    
+    
+    
+    
     
     /**
     *   @var string
     */
-    _date_string;
+    const _job_name;
+    
+    /**
+    *   @var string
+    */
+    const _date_string;
     
     /**
     *   constructor
     *
-    *   @param ?string job_name
-    *   @param ?string date_string
+    *   @param string job_name
+    *   @param string date_string
     */
-    constructor(job_name = null, date_string = null) {
+    constructor(job_name, date_string) {
         this._job_name = job_name;
         this._date_string = date_string;
-        
-        if (this._job_name === null && this._job_name === null
-            return;
-        ) {
         
         if (!this.validate) {
             throw "invalid data:"
@@ -78,9 +79,6 @@ class JobTime {
     *   @return string
     */
     jobDate() {
-        if (this._date_string === null) {
-            return null;
-        }
        return this._date_string.substr(0, 10);
     }
     
@@ -89,7 +87,7 @@ class JobTime {
     *
     *   @return string
     */
-    jobDate() {
+    jobDateTime() {
        return this._date_string;
     }
     
@@ -99,29 +97,6 @@ class JobTime {
     *   @return bool
     */
     jobDate() {
-        if (this._date_string === null) {
-            return null;
-        }
        return this._date_string.substr(12);
     }
-    
-    /**
-    *   jobDateTime
-    *
-    *   @return string
-    */
-    jobDate() {
-       return this._date_string;
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

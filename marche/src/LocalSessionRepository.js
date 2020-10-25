@@ -5,7 +5,7 @@ class LocalSessionRepository {
     /**
     *   @var object
     */
-    _storage;
+    const _storage;
     
     /**
     *   constructor
