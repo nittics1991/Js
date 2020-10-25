@@ -22,6 +22,14 @@ class JobTimeRepository extends LocalSessionRepository{
     *   @return ?JobTime
     */
     timecard(date_string) {
+       
+       //_NAMESPACEで区切っているけど、どうする?
+       //この場合、LocalSessionRepositoryはすべてover writeになる
+       //collectionのキー == Storageキーにする？
+       //この場合、localsession以外へ改造する場合、JobTimeRepositoryも影響する
+       
+       
+       
        let jobtimes = this.find(this._NAMESPACE);
        
        if (jobtimes === null

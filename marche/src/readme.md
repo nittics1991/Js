@@ -27,7 +27,9 @@
 
 ##メモ
 
-- storageはStorageEventを持っている
+###201025
+
+- JobTimeRepositoryどうする？
 
 
 
