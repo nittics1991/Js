@@ -1,18 +1,24 @@
 /**
 *   JobTimeRepository
 */
-class JobTimeRepository extends LocalSessionRepository{
+class JobTimeRepository {
     /**
-    *   @val
+    *   @var string
     */
-    const _NAMESPACE = 'jobtime';
+    _NAMESPACE = 'jobtime';
+    
+    /**
+    *   @var object
+    */
+    _repository;
     
     /**
     *   constructor
     *
+    *   @param object repository
     */
-    constructor() {
-        super();
+    constructor(repository) {
+        this._repository = repository;
     }
     
     /**
@@ -22,27 +28,8 @@ class JobTimeRepository extends LocalSessionRepository{
     *   @return ?JobTime
     */
     timecard(date_string) {
-       
-       //_NAMESPACEで区切っているけど、どうする?
-       //この場合、LocalSessionRepositoryはすべてover writeになる
-       //collectionのキー == Storageキーにする？
-       //この場合、localsession以外へ改造する場合、JobTimeRepositoryも影響する
-       
-       
-       
-       let jobtimes = this.find(this._NAMESPACE);
-       
-       if (jobtimes === null
-        || ! jobtimes instanceof Map
-       ) {
-           return null;
-       }
-       
-       jobtimes
-       
-       
-       
-       
+       let jobtimes = this._getRepositoryData();
+       return jobtimes.get(date_string) || {};
     }
     
     /**
@@ -52,6 +39,18 @@ class JobTimeRepository extends LocalSessionRepository{
     *   @return this
     */
     addStamp(jobname) {
+       let jobtimes = this._getRepositoryData();
+       let now = new Date();
+       let date_string = now.getFullYear()
+            + ('0' + (now.getMonth() + 1)).slice(-2)
+            + ('0' + now.getDate()).slice(-2);
+       
+       jobtimes[date_string] || {};
+       
+       
+       
+       
+       
        
        return this;
     }
@@ -88,11 +87,18 @@ class JobTimeRepository extends LocalSessionRepository{
     }
     
     /**
-    *   jobList
+    *   _getRepositoryData
     *
-    *   @return string[]
+    *   @return ?Map
     */
-    _find() {
+    _getRepositoryData() {
+       let jobtimes = this._repository.find(this._NAMESPACE);
        
+       if (jobtimes === null
+        || ! jobtimes instanceof Map
+       ) {
+           return null;
+       }
+       return jobtimes;
     }
 }
