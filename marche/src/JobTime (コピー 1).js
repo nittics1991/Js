@@ -8,23 +8,23 @@ class JobTime {
     const _job_name;
     
     /**
-    *   @var Date
+    *   @var string
     */
-    const _date;
+    const _date_string;
     
     /**
     *   constructor
     *
     *   @param string job_name
-    *   @param Date date_object
+    *   @param string date_string
     */
-    constructor(job_name, date_object) {
+    constructor(job_name, date_string) {
         this._job_name = job_name;
-        this._date = date_object;
+        this._date_string = date_string;
         
         if (!this.validate) {
             throw "invalid data:"
-                + Json.stringify([job_name, date_object]);
+                + Json.stringify([job_name, date_string]);
         }
     }
     
@@ -34,29 +34,29 @@ class JobTime {
     *   @return bool
     */
     validate() {
-       return this.validJobName(this._job_name)
-        && this.validJobDate(thsi._date));
+       return this.validJobName
+        && this.validJobDate;
     }
     
     /**
     *   validJobName
     *
-    *   @param string value
+    *   @param string job_name
     *   @return bool
     */
-    validJobName(value) {
-       return Validator.isString(value)
-        && value.length <= 20;
+    validJobName(job_name) {
+       return Validator.isString(job_name)
+        && job_name.length <= 20;
     }
     
     /**
     *   validJobDate
     *
-    *   @param string value
+    *   @param string job_name
     *   @return bool
     */
-    validJobName(value) {
-       return value instanceof Date;
+    validJobName(date_string) {
+       return Validator.isTextDateTime(date_string);
     }
     
     /**
@@ -74,7 +74,7 @@ class JobTime {
     *   @return string
     */
     jobDate() {
-       return this._date.toISOString().substr(0,10)
+       return this._date_string.substr(0, 10);
     }
     
     /**
@@ -83,7 +83,7 @@ class JobTime {
     *   @return string
     */
     jobDateTime() {
-       return this._date.toISOString();
+       return this._date_string;
     }
     
     /**
@@ -92,6 +92,6 @@ class JobTime {
     *   @return bool
     */
     jobDate() {
-       return this._date.toISOString().substr(11,8);
+       return this._date_string.substr(12);
     }
 }

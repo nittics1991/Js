@@ -29,7 +29,7 @@ class JobTimeRepository {
     */
     timecard(date_string) {
        let jobtimes = this._getRepositoryData();
-       return jobtimes.get(date_string) || {};
+       return jobtimes.get(date_string) || new JobTme();
     }
     
     /**
@@ -40,17 +40,16 @@ class JobTimeRepository {
     */
     addStamp(jobname) {
        let jobtimes = this._getRepositoryData();
-       let now = new Date();
-       let date_string = now.getFullYear()
-            + ('0' + (now.getMonth() + 1)).slice(-2)
-            + ('0' + now.getDate()).slice(-2);
+       let date_string = (new Date).toISOString().substr(0, 10);
+       let jobtime = new JobTime(jobname, new Date());
        
-       jobtimes[date_string] || {};
+       if (! jobtimes[date_string] instanceof Array) {
+           jobtimes[date_string] = [];
+       }
        
+       jobtimes[date_string].push(jobtime);
        
-       
-       
-       
+       this._repository.save(this._NAMESPACE, jobtimes);
        
        return this;
     }
