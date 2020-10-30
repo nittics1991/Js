@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+
+<title>Test Suite</title>
+<link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.11.3.css">
+</head>
+
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="https://code.jquery.com/qunit/qunit-2.11.3.js"></script>
+
+<script src="http://localhost:8000/JobTime.js"></script>
+
+<script>
+
+
+QUnit.module('JobTime', function() {
+    QUnit.test('コンストラクタ', function(assert) {
+        let datetime = new Date();
+        let jobname = '最初の仕事';
+        
+        let jobtime = new JobTime(jobname, datetime);
+        
+        assert.equal(jobtime._jobname, jobname);
+        assert.equal(jobtime._date, datetime);
+    });
+});
+
+
+</script>
+
+</body>
+</html>

@@ -5,12 +5,12 @@ class JobTime {
     /**
     *   @var string
     */
-    const _job_name;
+    _job_name;
     
     /**
     *   @var Date
     */
-    const _date;
+    _date;
     
     /**
     *   constructor
