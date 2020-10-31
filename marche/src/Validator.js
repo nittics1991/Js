@@ -38,10 +38,15 @@ class Validator {
             return false;
         }
         
-        console.log(dt.toISOString().substr(0, 10))
+        let local_dt = new Date(
+            dt.getTime() - dt.getTimezoneOffset() * 1000 * 60
+        );
         
-        
-        return dt.toISOString().substr(0, 10) === value;
+        try {
+            return local_dt.toISOString().substr(0, 10) === value;
+        } catch (e) {
+            return false;
+        }
     }
     
     /**
@@ -90,7 +95,12 @@ class Validator {
         
         try {
             dt = new Date('2001-01-01 ' + value);
-            return true;
+        } catch (e) {
+            return false;
+        }
+        
+        try {
+            return dt.toTimeString().substr(0, 8) === value;
         } catch (e) {
             return false;
         }

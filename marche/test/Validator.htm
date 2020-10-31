@@ -54,6 +54,7 @@ QUnit.module('Validator', function() {
         assert.equal(Validator.isTextTime('12:34:6'), false);
         assert.equal(Validator.isTextTime('12:3:56'), false);
         assert.equal(Validator.isTextTime('1:34:56'), false);
+        assert.equal(Validator.isTextTime('25:00:00'), false);
     });
     
     QUnit.test('isTextDateTime', function(assert) {

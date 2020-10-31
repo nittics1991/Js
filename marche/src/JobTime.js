@@ -108,6 +108,6 @@ class JobTime {
     *   @return bool
     */
     jobTime() {
-       return this._date.toISOString().substr(11,5);
+       return this._date.toTimeString().substr(0,5);
     }
 }
