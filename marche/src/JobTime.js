@@ -5,6 +5,11 @@ class JobTime {
     /**
     *   @var string
     */
+    _id;
+    
+    /**
+    *   @var string
+    */
     _job_name;
     
     /**
@@ -26,6 +31,8 @@ class JobTime {
             throw "invalid data:"
                 + Json.stringify([job_name, date_object]);
         }
+        
+        this._id = this.jobDateTime();
     }
     
     /**
@@ -35,7 +42,7 @@ class JobTime {
     */
     validate() {
        return this.validJobName(this._job_name)
-        && this.validJobDate(thsi._date));
+        && this.validJobDate(thsi._date);
     }
     
     /**
@@ -55,8 +62,17 @@ class JobTime {
     *   @param string value
     *   @return bool
     */
-    validJobName(value) {
+    validJobDate(value) {
        return value instanceof Date;
+    }
+    
+    /**
+    *   jobName
+    *
+    *   @return string
+    */
+    id() {
+       return this._id;
     }
     
     /**
@@ -91,7 +107,7 @@ class JobTime {
     *
     *   @return bool
     */
-    jobDate() {
-       return this._date.toISOString().substr(11,8);
+    jobTime() {
+       return this._date.toISOString().substr(11,5);
     }
 }

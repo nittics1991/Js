@@ -8,23 +8,23 @@ class Validator {
     *   @param mixed value
     *   @return bool
     */
-    isString(value) {
+    static isString(value) {
         return typeof value === "string"
-            && value !== "")
+            && value !== "";
     }
     
     /**
-    *   isTextDate
+    *   isTextDate yyyy-mm-dd
     *
     *   @param mixed value
     *   @return bool
     */
-    isTextDate(value) {
-        if (!Validator::isString(value)) {
+    static isTextDate(value) {
+        if (!Validator.isString(value)) {
             return false;
         }
         
-        let re = /^\d{4}-\d{2}-\d{2}$/
+        let re = /^\d{4}-\d{2}-\d{2}$/;
         
         if (!re.test(value)) {
             return false;
@@ -34,24 +34,28 @@ class Validator {
         
         try {
             dt = new Date(value + ' 00:00:00');
-            return true;
         } catch (e) {
             return false;
         }
+        
+        console.log(dt.toISOString().substr(0, 10))
+        
+        
+        return dt.toISOString().substr(0, 10) === value;
     }
     
     /**
-    *   isTextDateTime
+    *   isTextDateTime yyyy-mm-dd hh:ii:ss
     *
     *   @param mixed value
     *   @return bool
     */
-    isTextDateTime validJobName(value) {
-        if (!Validator::isString(value)) {
+    static isTextDateTime(value) {
+        if (!Validator.isString(value)) {
             return false;
         }
         
-        if (!Validator::isTextDate(value.substr(0, 10)) {
+        if (!Validator.isTextDate(value.substr(0, 10))) {
             return false;
         }
         
@@ -59,20 +63,20 @@ class Validator {
             return false;
         }
         
-        if (!Validator::isTextTime(value.substr(12)) {
+        if (!Validator.isTextTime(value.substr(11))) {
             return false;
         }
         return true;
     }
     
     /**
-    *   isTextTime
+    *   isTextTime hh:ii:ss
     *
     *   @param mixed value
     *   @return bool
     */
-    isTextTime(value) {
-        if (!Validator::isString(value)) {
+    static isTextTime(value) {
+        if (!Validator.isString(value)) {
             return false;
         }
         
