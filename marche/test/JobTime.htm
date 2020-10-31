@@ -46,26 +46,31 @@ QUnit.module('JobTime', function() {
         assert.equal(jobtime.jobTime(), '12:34');
     });
     
-    
-    
-    
-    
-    
     QUnit.test('validate', function(assert) {
         let datetime = new Date('1987-12-31 12:34:56');
         let job_name = '仕事1';
         
-        let jobtime = new JobTime(job_name, datetime);
+        assert.equal(JobTime.validJobName(job_name), true);
+        assert.equal(JobTime.validJobDate(datetime), true);
         
-        assert.equal(jobtime.validJobName(job_name), true);
+        let jobtime = new JobTime(job_name, datetime);
+        assert.equal(jobtime.validate(), true);
+        
+        datetime = true;
+        job_name = 12;
+        assert.equal(JobTime.validJobName(job_name), false);
+        assert.equal(JobTime.validJobDate(datetime), false);
+        
+        try {
+            jobtime = new JobTime(job_name, datetime);
+            assert.equal(1, 0);
+        } catch (e) {
+            assert.equal(1, 1);
+        }
+        
+        job_name = '123456789012345678901';
+        assert.equal(JobTime.validJobName(job_name), false);
     });
-    
-    
-    
-    
-    
-    
-    
 });
 
 

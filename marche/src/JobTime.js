@@ -41,8 +41,8 @@ class JobTime {
     *   @return bool
     */
     validate() {
-       return this.validJobName(this._job_name)
-        && this.validJobDate(this._date);
+       return JobTime.validJobName(this._job_name)
+        && JobTime.validJobDate(this._date);
     }
     
     /**
@@ -51,7 +51,7 @@ class JobTime {
     *   @param string value
     *   @return bool
     */
-    validJobName(value) {
+    static validJobName(value) {
        return Validator.isString(value)
         && value.length <= 20;
     }
@@ -62,7 +62,7 @@ class JobTime {
     *   @param string value
     *   @return bool
     */
-    validJobDate(value) {
+    static validJobDate(value) {
        return value instanceof Date;
     }
     
