@@ -1,102 +1,111 @@
 /**
 *   JobTimes
 */
-class JobTime {
-    
-    
-    
-    
-    
-    /**
-    *   @var string
-    */
-    const _job_name;
-    
-    /**
-    *   @var string
-    */
-    const _date_string;
-    
+class JobTimes extends Map{
     /**
     *   constructor
     *
-    *   @param string job_name
-    *   @param string date_string
+    *   @param ?iterable iterable
     */
-    constructor(job_name, date_string) {
-        this._job_name = job_name;
-        this._date_string = date_string;
+    constructor(iterable) {
+        super();
         
-        if (!this.validate) {
-            throw "invalid data:"
-                + Json.stringify([job_name, date_string]);
+        for 
+        
+        
+    }
+    
+    /**
+    *   set
+    *
+    *   @param JobTime jobtime
+    *   @return string ID
+    */
+    set(jobtime) {
+        if (! jobtime instanceof Jobtime) {
+            throw "must be jobTime:"
+                + Json.stringify(jobtime);
         }
+        
+        this._container.set(jobtime.id(), jobtime);
+        return jobtime.id();
     }
     
     /**
-    *   validate
+    *   has
+    *
+    *   @param string id
+    *   @return bool
+    */
+    has(id) {
+        return this._container.has(id);
+    }
+    
+    /**
+    *   get
+    *
+    *   @param string id
+    *   @return Jobtime
+    */
+    get(id) {
+        if (! this.has(id)) {
+            throw "not defined ID:" + id;
+        }
+        
+        return this._container.get(id);
+    }
+    
+    /**
+    *   delete
+    *
+    *   @param string id
+    *   @return bool
+    */
+    delete(id) {
+        return this._container.delete(id);
+    }
+    
+    /**
+    *   keys
     *
     *   @return bool
     */
-    validate() {
-       return this.validJobName
-        && this.validJobDate;
+    keys() {
+        return this._container.keys();
     }
     
     /**
-    *   validJobName
+    *   size
     *
-    *   @param string job_name
-    *   @return bool
+    *   @return int
     */
-    validJobName(job_name) {
-       return Validator.isString(job_name)
-        && job_name.length <= 20;
+    size() {
+        return this._container.size;
     }
     
     /**
-    *   validJobDate
+    *   forEach
     *
-    *   @param string job_name
-    *   @return bool
+    *   @param callable callback(?val, ?key, ?this_arg)
+    *   @return this
     */
-    validJobName(date_string) {
-       return Validator.isTextDateTime(date_string);
+    forEach(callback, this_arg) {
+        this._container.forEach(callback, this_arg);
+        return this;
     }
     
-    /**
-    *   jobName
-    *
-    *   @return string
-    */
-    jobName() {
-       return this._job_name;
-    }
     
-    /**
-    *   jobDate
-    *
-    *   @return string
-    */
-    jobDate() {
-       return this._date_string.substr(0, 10);
-    }
     
-    /**
-    *   jobDateTime
-    *
-    *   @return string
-    */
-    jobDateTime() {
-       return this._date_string;
-    }
     
-    /**
-    *   jobTime
-    *
-    *   @return bool
-    */
-    jobDate() {
-       return this._date_string.substr(12);
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
