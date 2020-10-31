@@ -24,7 +24,7 @@
 
 QUnit.module('JobTime', function() {
     QUnit.test('コンストラクタ', function(assert) {
-        let datetime = new Date();
+        let datetime = new Date('1987-12-31 12:34:56');
         let job_name = '最初の仕事';
         
         let jobtime = new JobTime(job_name, datetime);
@@ -40,11 +40,16 @@ QUnit.module('JobTime', function() {
         let jobtime = new JobTime(job_name, datetime);
         
         assert.equal(jobtime.jobName(), job_name);
-        assert.equal(jobtime.id(), '1987-12-31T03:34:56.000Z');
-        assert.equal(jobtime.jobDateTime(), '1987-12-31T03:34:56.000Z');
+        assert.equal(jobtime.jobDateTime(), '1987-12-31 12:34:56');
+        assert.equal(jobtime.id(), '1987-12-31 12:34:56');
         assert.equal(jobtime.jobDate(), '1987-12-31');
-        assert.equal(jobtime.jobTime(), '03:34');
+        assert.equal(jobtime.jobTime(), '12:34');
     });
+    
+    
+    
+    
+    
     
     QUnit.test('validate', function(assert) {
         let datetime = new Date('1987-12-31 12:34:56');

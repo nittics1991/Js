@@ -42,7 +42,7 @@ class JobTime {
     */
     validate() {
        return this.validJobName(this._job_name)
-        && this.validJobDate(thsi._date);
+        && this.validJobDate(this._date);
     }
     
     /**
@@ -90,7 +90,7 @@ class JobTime {
     *   @return string
     */
     jobDate() {
-       return this._date.toISOString().substr(0,10)
+       return this.jobDateTime().substr(0,10)
     }
     
     /**
@@ -99,7 +99,11 @@ class JobTime {
     *   @return string
     */
     jobDateTime() {
-       return this._date.toISOString();
+        let local_date = new Date(
+            this._date.getTime()
+                - this._date.getTimezoneOffset() * 60 * 1000
+            );
+       return local_date.toISOString().substr(0, 19).replace('T', ' ');
     }
     
     /**
