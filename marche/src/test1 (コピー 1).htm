@@ -120,87 +120,31 @@ nav ul, nav ol {
 
 </div>
 
-<!--
-
 <script src="./EventDispatcher.js"></script>
 <script src="./LocalSessionRepository.js"></script>
 
--->
-
 <script>
 
-const NAMESPACE = 'marche';
+obj = new Date();
 
-let storage = window.localStorage;
-
-//let storage_data = storage.getItem(NAMESPACE);
-
-
-//debug
-storage_data = {
-};
-
-storage_data[(new Date('2020-01-01 00:00:00')).getTime()] = 'AAA';
-storage_data[(new Date('2020-01-01 01:00:00')).getTime()] = 'BBB';
-storage_data[(new Date('2020-01-01 02:00:00')).getTime()] = 'CCC';
-storage_data[(new Date('2020-01-01 03:00:00')).getTime()] = 'DDD';
-storage_data[(new Date('2020-01-03 04:00:00')).getTime()] = 'EEE';
-storage_data[(new Date('2020-01-02 05:00:00')).getTime()] = 'FFF';
-storage_data[(new Date('2020-01-02 06:00:00')).getTime()] = 'GGG';
+val = obj instanceof Date;
 
 
 
-Object.prototype.hoge = function() {};
 
 
-if (storage_data) {
-    
-    let dateFormatter = {};
-    toDate = (val) => {
-    //~ dateFormatter.protorype.toDate = (val) => {
-        
-        let dt;
-        
-        try {
-            dt = new Date(val * 1000);
-        } catch (e) {
-            return '';
-        }
-        
-        return (new Date(val * 1000 + dt.getTimezoneOffset() * 60)).toISOString()
-            
-            //~ .substr(0,10);
-    }
-    
-    
-    
-    //JOB入力画面
-    let elem = document.querySelector('#data_input table tbody');
-    
-    
-    
-    Object.keys(storage_data).forEach(function(key) {
-        
-        
-        //~ val = dateFormatter.toDate(storage_data[key]);
-        val = toDate(key);
-        
-        
-        
-        console.log(key)
-        console.log(new Date(key * 1000))
-        
-        
-        
-        console.log(val)
-    });
-    
-    
-    
-    
-}
+console.log(val);
 
 
+
+
+
+
+val = new Map();
+val.set('aaa', [1,2,3])
+val.set('bbb', [11,12,13])
+
+console.log(val instanceof Map)
 
 
 
