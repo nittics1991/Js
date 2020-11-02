@@ -148,53 +148,49 @@ storage_data[(new Date('2020-01-03 04:00:00')).getTime()] = 'EEE';
 storage_data[(new Date('2020-01-02 05:00:00')).getTime()] = 'FFF';
 storage_data[(new Date('2020-01-02 06:00:00')).getTime()] = 'GGG';
 
-
-
+//LOOPテスト用
 Object.prototype.hoge = function() {};
+
+//日付文字列取得関数
+toDate = (str_unixtime) => {
+    let dt;
+    
+    try {
+        dt = new Date(parseInt(str_unixtime));
+    } catch (e) {
+        return '';
+    }
+    return (new Date(str_unixtime - dt.getTimezoneOffset() * 60 * 1000))
+        .toISOString().substr(0,10);
+}
+
+
+
+
+
+
+
+
 
 
 if (storage_data) {
+    //JOB入力画面
+    let str_table_data = '';
     
-    let dateFormatter = {};
-    toDate = (val) => {
-    //~ dateFormatter.protorype.toDate = (val) => {
+    Object.values(storage_data).reverse().forEach(function(jobname) {
+        let mem = [];
         
-        let dt;
-        
-        try {
-            dt = new Date(val * 1000);
-        } catch (e) {
-            return '';
+        if (mem.indexOf(jobname) === -1) {
+            return;
         }
         
-        return (new Date(val * 1000 + dt.getTimezoneOffset() * 60)).toISOString()
-            
-            //~ .substr(0,10);
-    }
-    
-    
-    
-    //JOB入力画面
-    let elem = document.querySelector('#data_input table tbody');
-    
-    
-    
-    Object.keys(storage_data).forEach(function(key) {
+        str_table_data += '<tr>\n';
+        str_table_data += '<td>' + jobname + '</td>';
         
-        
-        //~ val = dateFormatter.toDate(storage_data[key]);
-        val = toDate(key);
-        
-        
-        
-        console.log(key)
-        console.log(new Date(key * 1000))
-        
-        
-        
-        console.log(val)
+        mem.push(jobname);
     });
     
+    let elem = document.querySelector('#data_input table tbody');
     
     
     
