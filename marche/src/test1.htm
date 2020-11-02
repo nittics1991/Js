@@ -157,7 +157,6 @@ th, td {
         
         <table>
             <thead>
-                <th>ID</th>
                 <th>JOB名</th>
                 <th>作業(h)</th>
             </thead>
@@ -247,7 +246,7 @@ toTime = (str_unixtime) => {
 
 
 if (storage_data) {
-    //JOB入力画面
+    //------------------JOB入力画面
     let str_table_data = '';
     let memory_items = [];
     
@@ -268,7 +267,7 @@ if (storage_data) {
     elem.insertAdjacentHTML('beforeend', str_table_data);
     
     
-    //タイムカード
+    //---------------タイムカード
     //~ let str_table_data = '';
     
         str_table_data = '';
@@ -309,6 +308,69 @@ if (storage_data) {
     
     
     
+    //---------------集計
+    //~ let str_table_data = '';
+        str_table_data = '';
+    //~ let prev_data = 0;
+        prev_data = 0;
+        
+    //不要?
+    //~ let memory_items = [];
+        //~ memory_items = [];
+    
+    
+    let total_key = [];
+    let total_data = [];
+    
+    
+    
+    Object.keys(storage_data).sort().forEach(function(jobtime) {
+        let target_str_date =
+            document.querySelector('#data_view input[name="job_date"]')
+            .value;
+        
+        let min_unixtime = (new Date(target_str_date + ' 00:00:00.000'))
+            .getTime();
+        let max_unixtime = (new Date(target_str_date + ' 23:59:59.999'))
+            .getTime();
+        
+        if (parseInt(jobtime) >= min_unixtime
+            && parseInt(jobtime) <= max_unixtime
+        ) {
+            let diff_time =
+                parseInt(jobtime) - prev_data;
+            
+            if ((let pos = total_key.indexOf(storage_data[jobtime])) === -1) {
+                pos = total_key.push(storage_data[jobtime]) - 1;
+                total_data[pos] = 0;
+            }
+            
+            total_data[pos] += prev_data? diff_time:0;
+            
+            prev_data = parseInt(jobtime);
+        }
+    });
+    
+    
+    
+    
+    //何かの順番にソートして集計を表示する
+    
+    
+    
+        str_table_data = '';
+    
+    Object.keys(storage_data).sort().forEach(function(jobtime) {
+        str_table_data += '<tr>';
+        str_table_data += '<td>' + storage_data[jobtime] + '</td>';
+        str_table_data += '<td>' + toTime(jobtime) + '</td>';
+        str_table_data += '</tr>';
+    });
+    
+    //~ let elem = document.querySelector('#data_input table tbody');
+        elem = document.querySelector('#data_total_view table tbody');
+        
+    elem.insertAdjacentHTML('beforeend', str_table_data);
     
     
     
