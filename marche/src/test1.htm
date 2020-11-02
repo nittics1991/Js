@@ -8,6 +8,7 @@
 
 ul, ol {
     list-style:none;
+    padding:0;
 }
 
 button {
@@ -20,11 +21,43 @@ button {
     
 }
 
+article {
+    padding:2px;
+}
+
 nav ul, nav ol {
     display:flex;
 }
 
+table {
+    border-collapse:collapse;
+    border:1px solid #c0c0c0;
+    width:90%;
+}
 
+th, td {
+    border:1px solid #c0c0c0;
+    white-space:nowrap;
+}
+
+
+
+
+
+
+
+#data_view td:first-child,
+    #data_view th:first-child {
+    display:none;
+}
+
+#data_view td:nth-child(3) {
+    text-align:center;
+}
+
+#data_view td:last-child {
+    text-align:right;
+}
 
 </style>
 
@@ -72,20 +105,29 @@ nav ul, nav ol {
         
         <nav>
             <ol>
+<!--
+                
                 <li><button name="last_month_button"><<</button></li>
                 <li><button name="previous_day_button"><</button></li>
+                
+-->
                 <li><input type="date" name="job_date"></li>
+<!--
+                
                 <li><button name="tomorrow_button">></button></li>
                 <li><button name="next_month_button">>></button></li>
+                
+-->
             </ol>
         </nav>
         
         
         <table>
             <thead>
+                <th>ID</th>
                 <th>JOB名</th>
                 <th>開始時刻</th>
-                <th>作業時間(h)</th>
+                <th>作業(h)</th>
             </thead>
             <tbody>
             </tbody>
@@ -97,19 +139,27 @@ nav ul, nav ol {
         
         <nav>
             <ol>
+<!--
+                
                 <li><button name="last_month_button"><<</button></li>
                 <li><button name="previous_day_button"><</button></li>
+                
+-->
                 <li><input type="date" name="job_date"></li>
+<!--
+                
                 <li><button name="tomorrow_button">></button></li>
                 <li><button name="next_month_button">>></button></li>
+                
+-->
             </ol>
         </nav>
         
         <table>
             <thead>
+                <th>ID</th>
                 <th>JOB名</th>
-                <th>開始時刻</th>
-                <th>作業時間(h)</th>
+                <th>作業(h)</th>
             </thead>
             <tbody>
             </tbody>
@@ -147,9 +197,21 @@ storage_data[(new Date('2020-01-01 03:00:00')).getTime()] = 'DDD';
 storage_data[(new Date('2020-01-03 04:00:00')).getTime()] = 'EEE';
 storage_data[(new Date('2020-01-02 05:00:00')).getTime()] = 'FFF';
 storage_data[(new Date('2020-01-02 06:00:00')).getTime()] = 'GGG';
+storage_data[(new Date('2020-01-01 03:30:00')).getTime()] = 'BBB';
+storage_data[(new Date('2020-01-01 03:45:00')).getTime()] = 'CCC';
 
 //LOOPテスト用
 Object.prototype.hoge = function() {};
+
+//debug日
+job_dates = document.querySelectorAll('input[type="date"][name="job_date"]');
+
+for (elm of job_dates) {
+   elm.value = '2020-01-01'; 
+}
+
+
+
 
 //日付文字列取得関数
 toDate = (str_unixtime) => {
@@ -164,7 +226,18 @@ toDate = (str_unixtime) => {
         .toISOString().substr(0,10);
 }
 
-
+//時刻文字列取得関数
+toTime = (str_unixtime) => {
+    let dt;
+    
+    try {
+        dt = new Date(parseInt(str_unixtime));
+    } catch (e) {
+        return '';
+    }
+    return (new Date(str_unixtime - dt.getTimezoneOffset() * 60 * 1000))
+        .toISOString().substr(11,5);
+}
 
 
 
@@ -176,31 +249,71 @@ toDate = (str_unixtime) => {
 if (storage_data) {
     //JOB入力画面
     let str_table_data = '';
+    let memory_items = [];
     
     Object.values(storage_data).reverse().forEach(function(jobname) {
-        let mem = [];
         
-        if (mem.indexOf(jobname) === -1) {
+        if (memory_items.indexOf(jobname) !== -1) {
             return;
         }
         
-        str_table_data += '<tr>\n';
+        str_table_data += '<tr>';
         str_table_data += '<td>' + jobname + '</td>';
+        str_table_data += '</tr>';
         
-        mem.push(jobname);
+        memory_items.push(jobname);
     });
     
     let elem = document.querySelector('#data_input table tbody');
+    elem.insertAdjacentHTML('beforeend', str_table_data);
+    
+    
+    //タイムカード
+    //~ let str_table_data = '';
+    
+        str_table_data = '';
+    let prev_data = 0;
+    
+    Object.keys(storage_data).sort().forEach(function(jobtime) {
+        let target_str_date =
+            document.querySelector('#data_view input[name="job_date"]')
+            .value;
+        
+        let min_unixtime = (new Date(target_str_date + ' 00:00:00.000'))
+            .getTime();
+        let max_unixtime = (new Date(target_str_date + ' 23:59:59.999'))
+            .getTime();
+        
+        if (parseInt(jobtime) >= min_unixtime
+            && parseInt(jobtime) <= max_unixtime
+        ) {
+            let diff_time = (
+                (parseInt(jobtime) - prev_data) / 1000 / 60 / 60
+            ).toFixed(2);
+            
+            str_table_data += '<tr>';
+            str_table_data += '<td>' + jobtime + '</td>';
+            str_table_data += '<td>' + storage_data[jobtime] + '</td>';
+            str_table_data += '<td>' + toTime(jobtime) + '</td>';
+            str_table_data += '<td>' + (prev_data? diff_time:'') + '</td>';
+            str_table_data += '</tr>';
+            
+            prev_data = parseInt(jobtime);
+        }
+    });
+    
+    //~ let elem = document.querySelector('#data_input table tbody');
+        elem = document.querySelector('#data_view table tbody');
+        
+    elem.insertAdjacentHTML('beforeend', str_table_data);
+    
+    
+    
+    
     
     
     
 }
-
-
-
-
-
-
 
 
 
