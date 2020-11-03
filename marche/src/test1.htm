@@ -161,12 +161,10 @@ const NAMESPACE = 'marche';
 
 let storage = window.localStorage;
 
-//let storage_data = storage.getItem(NAMESPACE);
+let item = storage.getItem(NAMESPACE);
+let storage_data = item? JSON.parse(item):{};
 
 
-//debug
-storage_data = {
-};
 
 storage_data[(new Date('2020-01-01 00:00:00')).getTime()] = 'AAA';
 storage_data[(new Date('2020-01-01 01:00:00')).getTime()] = 'BBB';
@@ -266,8 +264,9 @@ JobInputView.render = (storage_data) => {
         memory_items.push(jobname);
     });
     
-    document.querySelector('#job_input_view table tbody')
-        .insertAdjacentHTML('beforeend', str_table_data);
+    let elem = document.querySelector('#job_input_view table tbody');
+    elem.textContent = null;
+    elem.insertAdjacentHTML('beforeend', str_table_data);
 }
 
 TimeCardView = {};
@@ -323,8 +322,9 @@ TimeCardView.render = (storage_data) => {
         str_table_data += '</tr>';
     });
     
-    document.querySelector('#timecard_view table tbody')
-        .insertAdjacentHTML('beforeend', str_table_data);
+    let elem = document.querySelector('#timecard_view table tbody');
+    elem.textContent = null;
+    elem.insertAdjacentHTML('beforeend', str_table_data);
 }
 
 TotalDataView = {};
@@ -380,20 +380,14 @@ TotalDataView.render = (storage_data) => {
         str_table_data += '</tr>';
     });
     
-    document.querySelector('#total_data_view table tbody')
-        .insertAdjacentHTML('beforeend', str_table_data);
+    
+    let elem = document.querySelector('#total_data_view table tbody');
+    elem.textContent = null;
+    elem.insertAdjacentHTML('beforeend', str_table_data);
 }
 
 
 //////////////////////////////
-
-    
-    
-
-
-
-
-
 
 
 
@@ -402,6 +396,48 @@ if (storage_data) {
     TimeCardView.render(storage_data);
     TotalDataView.render(storage_data);
 }
+
+
+
+//////////////////////////////
+
+
+//イベント登録
+
+
+JobInputView.addEvent = (storage) => {
+    document.querySelector('#job_input_view button[name="job_name_button"]')
+        .addEventListener('click', (event) =>{
+            let jobname = document.querySelector('#job_input_view input[name="job_name"]')
+                .value;
+            
+            if (! jobname) {
+                return;
+            }
+            
+            let item = storage.getItem(NAMESPACE);
+            let storage_data = item? JSON.parse(item):{};
+            
+            let id = (new Date()).getTime();
+            storage_data[id] = jobname;
+            
+            storage.setItem(NAMESPACE, JSON.stringify(storage_data));
+            
+            
+            
+            JobInputView.render(storage_data);
+            TimeCardView.render(storage_data);
+            TotalDataView.render(storage_data);
+            
+            
+        });
+}
+
+
+
+JobInputView.addEvent(storage);
+
+
 
 
 
