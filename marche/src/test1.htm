@@ -46,20 +46,20 @@ th, td {
 
 
 
-#data_view td:first-child,
-    #data_view th:first-child {
+#timecard_view td:first-child,
+    #timecard_view th:first-child {
     display:none;
 }
 
-#data_view td:nth-child(3) {
+#timecard_view td:nth-child(3) {
     text-align:center;
 }
 
-#data_view td:last-child {
+#timecard_view td:last-child {
     text-align:right;
 }
 
-#data_total_view td:last-child {
+#total_data_view td:last-child {
     text-align:right;
 }
 
@@ -75,16 +75,16 @@ th, td {
     
     <nav>
         <ul>
-            <li><a href="#data_input">JOB入力</a></li>
-            <li><a href="#data_view">タイムカード</a></li>
-            <li><a href="#data_total_view">集計</a></li>
+            <li><a href="#job_input_view">JOB入力</a></li>
+            <li><a href="#timecard_view">タイムカード</a></li>
+            <li><a href="#total_data_view">集計</a></li>
             <li><button name="csv_button">CSV出力</button></li>
         </ul>
     </nav>
 </header>
 
 <section id="main">
-    <article id="data_input">
+    <article id="job_input_view">
         <h2>JOB入力</h2>
         
         <nav>
@@ -103,7 +103,7 @@ th, td {
         </table>
     </article>
     
-    <article id="data_view">
+    <article id="timecard_view">
         <h2>タイムカード</h2>
         
         <nav>
@@ -125,7 +125,7 @@ th, td {
         </table>
     </article>
     
-    <article id="data_total_view">
+    <article id="total_data_view">
         <h2>集計</h2>
         
         <nav>
@@ -194,8 +194,22 @@ for (elm of job_dates) {
 
 
 
-//日付文字列取得関数
-toDate = (str_unixtime) => {
+
+
+
+//////////////////////////////
+////関数
+
+
+DateFormatter = {};
+
+/**
+*   日付文字列取得
+*
+*   @param str_unixtime
+*   @return string
+*/
+DateFormatter.toDate = (str_unixtime) => {
     let dt;
     
     try {
@@ -207,8 +221,13 @@ toDate = (str_unixtime) => {
         .toISOString().substr(0,10);
 }
 
-//時刻文字列取得関数
-toTime = (str_unixtime) => {
+/**
+*   時刻文字列取得
+*
+*   @param str_unixtime
+*   @return string
+*/
+DateFormatter.toTime = (str_unixtime) => {
     let dt;
     
     try {
@@ -223,17 +242,19 @@ toTime = (str_unixtime) => {
 
 
 
+JobInputView = {};
 
-
-
-
-if (storage_data) {
-    //------------------JOB入力画面
+/**
+*   JOB入力 描画
+*
+*   @param storage_data
+*
+*/
+JobInputView.render = (storage_data) => {
     let str_table_data = '';
     let memory_items = [];
     
     Object.values(storage_data).reverse().forEach(function(jobname) {
-        
         if (memory_items.indexOf(jobname) !== -1) {
             return;
         }
@@ -245,17 +266,21 @@ if (storage_data) {
         memory_items.push(jobname);
     });
     
-    let elem = document.querySelector('#data_input table tbody');
-    elem.insertAdjacentHTML('beforeend', str_table_data);
-    
-    
-    
-    
-    
-    
-    //---------------タイムカード
+    document.querySelector('#job_input_view table tbody')
+        .insertAdjacentHTML('beforeend', str_table_data);
+}
+
+TimeCardView = {};
+
+/**
+*   タイムカード 描画
+*
+*   @param storage_data
+*
+*/
+TimeCardView.render = (storage_data) => {
     let target_str_date =
-        document.querySelector('#data_view input[name="job_date"]')
+        document.querySelector('#timecard_view input[name="job_date"]')
         .value;
     let min_unixtime = (new Date(target_str_date + ' 00:00:00.000'))
         .getTime();
@@ -276,7 +301,7 @@ if (storage_data) {
             dataset.push({
                 id:jobtime,
                 name:storage_data[jobtime],
-                start_time:toTime(jobtime),
+                start_time:DateFormatter.toTime(jobtime),
             });
             
             if (prev_data) {
@@ -287,9 +312,7 @@ if (storage_data) {
         }
     });
     
-    //~ let str_table_data = '';
-    
-        str_table_data = '';
+    let str_table_data = '';
     
     dataset.forEach(function(obj) {
         str_table_data += '<tr>';
@@ -300,42 +323,28 @@ if (storage_data) {
         str_table_data += '</tr>';
     });
     
-    
-    
-    
-    
-    
-    
-    
-    //~ let elem = document.querySelector('#data_input table tbody');
-        elem = document.querySelector('#data_view table tbody');
-        
-    elem.insertAdjacentHTML('beforeend', str_table_data);
-    
-    
-    
-    
-    
-    
-    //---------------集計
-    //~ let target_str_date =
-        target_str_date =
-        document.querySelector('#data_view input[name="job_date"]')
+    document.querySelector('#timecard_view table tbody')
+        .insertAdjacentHTML('beforeend', str_table_data);
+}
+
+TotalDataView = {};
+
+/**
+*   集計 描画
+*
+*   @param storage_data
+*
+*/
+TotalDataView.render = (storage_data) => {
+    let target_str_date =
+        document.querySelector('#total_data_view input[name="job_date"]')
         .value;
-    //~ let min_unixtime = (new Date(target_str_date + ' 00:00:00.000'))
-        min_unixtime = (new Date(target_str_date + ' 00:00:00.000'))
+    let min_unixtime = (new Date(target_str_date + ' 00:00:00.000'))
         .getTime();
-    //~ let max_unixtime = (new Date(target_str_date + ' 23:59:59.999'))
-        max_unixtime = (new Date(target_str_date + ' 23:59:59.999'))
+    let max_unixtime = (new Date(target_str_date + ' 23:59:59.999'))
         .getTime();
-        
-            
-            
-    //~ let str_table_data = '';
-        str_table_data = '';
-    //~ let prev_data = 0;
-        prev_data = 0;
-        
+    let str_table_data = '';
+    let prev_data = 0;
     let total_key = [];
     let total_data = [];
     
@@ -371,15 +380,30 @@ if (storage_data) {
         str_table_data += '</tr>';
     });
     
-    //~ let elem = document.querySelector('#data_input table tbody');
-        elem = document.querySelector('#data_total_view table tbody');
-        
-    elem.insertAdjacentHTML('beforeend', str_table_data);
-    
-    
-    
-    
+    document.querySelector('#total_data_view table tbody')
+        .insertAdjacentHTML('beforeend', str_table_data);
 }
+
+
+//////////////////////////////
+
+    
+    
+
+
+
+
+
+
+
+
+if (storage_data) {
+    JobInputView.render(storage_data);
+    TimeCardView.render(storage_data);
+    TotalDataView.render(storage_data);
+}
+
+
 
 
 
