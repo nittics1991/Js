@@ -350,7 +350,7 @@ TotalDataView.render = (storage_data) => {
         .getTime();
     let max_unixtime = (new Date(target_str_date + ' 23:59:59.999'))
         .getTime();
-    let str_table_data = '';
+    let prev_pos = -1;
     let prev_data = 0;
     let total_key = [];
     let total_data = [];
@@ -368,18 +368,18 @@ TotalDataView.render = (storage_data) => {
                 total_data[pos] = 0;
             }
             
-            total_data[pos] += (prev_data? diff_time:0);
+            total_data[prev_pos] += prev_pos > -1? diff_time:0;
             
+            prev_pos = pos;
             prev_data = parseInt(jobtime);
         }
     });
     
-        str_table_data = '';
+    let str_table_data = '';
     
     total_key.forEach(function(jobname, i) {
-        let diff_time = (
-            total_data[i] / 1000 / 60 / 60
-        ).toFixed(2);
+        let diff_time = total_data[i]?
+        (total_data[i] / 1000 / 60 / 60).toFixed(2):'';
             
         str_table_data += '<tr>';
         str_table_data += '<td>' + jobname + '</td>';
@@ -420,10 +420,9 @@ if (storage_data) {
 JobInputView.addEvent = (storage) => {
     document.querySelector('#job_input_view button[name="job_name_button"]')
         .addEventListener('click', (event) =>{
-            let jobname = document.querySelector('#job_input_view input[name="job_name"]')
-                .value;
+            let jobname = document.querySelector('#job_input_view input[name="job_name"]');
             
-            if (! jobname) {
+            if (! jobname.value) {
                 return;
             }
             
@@ -431,11 +430,11 @@ JobInputView.addEvent = (storage) => {
             let storage_data = item? JSON.parse(item):{};
             
             let id = (new Date()).getTime();
-            storage_data[id] = jobname;
+            storage_data[id] = jobname.value;
             
             storage.setItem(NAMESPACE, JSON.stringify(storage_data));
             
-            
+            jobname.value = '';
             
             JobInputView.render(storage_data);
             TimeCardView.render(storage_data);
