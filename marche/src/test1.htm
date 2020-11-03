@@ -99,7 +99,6 @@ th, td {
                 <th>JOB名</th>
             </thead>
             <tbody>
-                <td>業務終了</td>
             </tbody>
         </table>
     </article>
@@ -262,11 +261,8 @@ if (storage_data) {
         .getTime();
     let max_unixtime = (new Date(target_str_date + ' 23:59:59.999'))
         .getTime();
-        
-        
-    //~ let str_table_data = '';
+    let dataset = [];
     
-        str_table_data = '';
     let prev_data = 0;
     
     Object.keys(storage_data).sort().forEach(function(jobtime) {
@@ -277,16 +273,39 @@ if (storage_data) {
                 (parseInt(jobtime) - prev_data) / 1000 / 60 / 60
             ).toFixed(2);
             
-            str_table_data += '<tr>';
-            str_table_data += '<td>' + jobtime + '</td>';
-            str_table_data += '<td>' + storage_data[jobtime] + '</td>';
-            str_table_data += '<td>' + toTime(jobtime) + '</td>';
-            str_table_data += '<td>' + (prev_data? diff_time:'') + '</td>';
-            str_table_data += '</tr>';
+            dataset.push({
+                id:jobtime,
+                name:storage_data[jobtime],
+                start_time:toTime(jobtime),
+            });
+            
+            if (prev_data) {
+                dataset[dataset.length - 2]['diff_time'] = diff_time;
+            }
             
             prev_data = parseInt(jobtime);
         }
     });
+    
+    //~ let str_table_data = '';
+    
+        str_table_data = '';
+    
+    dataset.forEach(function(obj) {
+        str_table_data += '<tr>';
+        str_table_data += '<td>' + obj.id + '</td>';
+        str_table_data += '<td>' + obj.name + '</td>';
+        str_table_data += '<td>' + obj.start_time + '</td>';
+        str_table_data += '<td>' + (obj.diff_time || '') + '</td>';
+        str_table_data += '</tr>';
+    });
+    
+    
+    
+    
+    
+    
+    
     
     //~ let elem = document.querySelector('#data_input table tbody');
         elem = document.querySelector('#data_view table tbody');
