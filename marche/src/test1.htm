@@ -59,6 +59,10 @@ th, td {
     text-align:right;
 }
 
+#data_total_view td:last-child {
+    text-align:right;
+}
+
 </style>
 
 </head>
@@ -198,6 +202,9 @@ storage_data[(new Date('2020-01-02 05:00:00')).getTime()] = 'FFF';
 storage_data[(new Date('2020-01-02 06:00:00')).getTime()] = 'GGG';
 storage_data[(new Date('2020-01-01 03:30:00')).getTime()] = 'BBB';
 storage_data[(new Date('2020-01-01 03:45:00')).getTime()] = 'CCC';
+storage_data[(new Date('2020-01-01 07:00:00')).getTime()] = '業務終了';
+storage_data[(new Date('2020-01-02 08:00:00')).getTime()] = '業務終了';
+storage_data[(new Date('2020-01-03 09:00:00')).getTime()] = '業務終了';
 
 //LOOPテスト用
 Object.prototype.hoge = function() {};
@@ -268,21 +275,21 @@ if (storage_data) {
     
     
     //---------------タイムカード
+    let target_str_date =
+        document.querySelector('#data_view input[name="job_date"]')
+        .value;
+    let min_unixtime = (new Date(target_str_date + ' 00:00:00.000'))
+        .getTime();
+    let max_unixtime = (new Date(target_str_date + ' 23:59:59.999'))
+        .getTime();
+        
+        
     //~ let str_table_data = '';
     
         str_table_data = '';
     let prev_data = 0;
     
     Object.keys(storage_data).sort().forEach(function(jobtime) {
-        let target_str_date =
-            document.querySelector('#data_view input[name="job_date"]')
-            .value;
-        
-        let min_unixtime = (new Date(target_str_date + ' 00:00:00.000'))
-            .getTime();
-        let max_unixtime = (new Date(target_str_date + ' 23:59:59.999'))
-            .getTime();
-        
         if (parseInt(jobtime) >= min_unixtime
             && parseInt(jobtime) <= max_unixtime
         ) {
@@ -309,61 +316,63 @@ if (storage_data) {
     
     
     //---------------集計
+    //~ let target_str_date =
+        target_str_date =
+        document.querySelector('#data_view input[name="job_date"]')
+        .value;
+    //~ let min_unixtime = (new Date(target_str_date + ' 00:00:00.000'))
+        min_unixtime = (new Date(target_str_date + ' 00:00:00.000'))
+        .getTime();
+    //~ let max_unixtime = (new Date(target_str_date + ' 23:59:59.999'))
+        max_unixtime = (new Date(target_str_date + ' 23:59:59.999'))
+        .getTime();
+        
+            
+            
     //~ let str_table_data = '';
         str_table_data = '';
     //~ let prev_data = 0;
         prev_data = 0;
         
-    //不要?
-    //~ let memory_items = [];
-        //~ memory_items = [];
-    
-    
     let total_key = [];
     let total_data = [];
     
-    
-    
     Object.keys(storage_data).sort().forEach(function(jobtime) {
-        let target_str_date =
-            document.querySelector('#data_view input[name="job_date"]')
-            .value;
-        
-        let min_unixtime = (new Date(target_str_date + ' 00:00:00.000'))
-            .getTime();
-        let max_unixtime = (new Date(target_str_date + ' 23:59:59.999'))
-            .getTime();
-        
         if (parseInt(jobtime) >= min_unixtime
             && parseInt(jobtime) <= max_unixtime
         ) {
             let diff_time =
                 parseInt(jobtime) - prev_data;
+            let pos;
             
-            if ((let pos = total_key.indexOf(storage_data[jobtime])) === -1) {
+            if ((pos = total_key.indexOf(storage_data[jobtime])) === -1) {
                 pos = total_key.push(storage_data[jobtime]) - 1;
                 total_data[pos] = 0;
             }
             
-            total_data[pos] += prev_data? diff_time:0;
+            total_data[pos] += (prev_data? diff_time:0);
             
             prev_data = parseInt(jobtime);
         }
     });
     
-    
-    
-    
-    //何かの順番にソートして集計を表示する
-    
-    
-    
         str_table_data = '';
     
-    Object.keys(storage_data).sort().forEach(function(jobtime) {
+    
+    
+    console.log(total_key)
+    console.log(total_data)
+    
+    
+    
+    total_key.forEach(function(jobname, i) {
+        let diff_time = (
+            total_data[i] / 1000 / 60 / 60
+        ).toFixed(2);
+            
         str_table_data += '<tr>';
-        str_table_data += '<td>' + storage_data[jobtime] + '</td>';
-        str_table_data += '<td>' + toTime(jobtime) + '</td>';
+        str_table_data += '<td>' + jobname + '</td>';
+        str_table_data += '<td>' + diff_time + '</td>';
         str_table_data += '</tr>';
     });
     
