@@ -192,6 +192,13 @@ for (elm of job_dates) {
 
 
 
+//////////////////////////////
+//EventDispatcher
+
+
+
+
+
 
 
 
@@ -404,7 +411,12 @@ if (storage_data) {
 
 //イベント登録
 
-
+/**
+*   JOB入力 ボタン処理
+*
+*   @param storage
+*
+*/
 JobInputView.addEvent = (storage) => {
     document.querySelector('#job_input_view button[name="job_name_button"]')
         .addEventListener('click', (event) =>{
@@ -429,13 +441,87 @@ JobInputView.addEvent = (storage) => {
             TimeCardView.render(storage_data);
             TotalDataView.render(storage_data);
             
-            
+            event.preventDefault();
         });
 }
 
 
 
 JobInputView.addEvent(storage);
+
+//
+
+
+
+
+
+/**
+*   タイムカード　日付変更処理
+*
+*   @param storage
+*
+*/
+TimeCardView.addEvent = (storage) => {
+    document.querySelector('#timecard_view input[name="job_date"]')
+        .addEventListener('change', (event) =>{
+            let total_data_view_job_date =
+                document.querySelector('#total_data_view input[name="job_date"]');
+            
+            if (total_data_view_job_date.value != event.target.value
+            ) {
+                
+                //直接ではなくmethodにしたい
+                total_data_view_job_date.value = event.target.value;
+            }
+            
+            //JOB入力は更新不要
+            //JobInputView.render(storage_data);
+            TimeCardView.render(storage_data);
+            TotalDataView.render(storage_data);
+            
+            event.preventDefault();
+        });
+}
+
+
+TimeCardView.addEvent(storage);
+
+
+//タイムカードと同じく全画面再表示
+/**
+*   集計　日付変更処理
+*
+*   @param storage
+*
+*/
+TotalDataView.addEvent = (storage) => {
+    document.querySelector('#total_data_view input[name="job_date"]')
+        .addEventListener('change', (event) =>{
+            let timecard_view_job_date =
+                document.querySelector('#timecard_view input[name="job_date"]');
+            
+            if (timecard_view_job_date.value != event.target.value
+            ) {
+                
+                //直接ではなくmethodにしたい
+                timecard_view_job_date.value = event.target.value;
+                
+                
+                
+            }
+            
+            
+            //JOB入力は更新不要
+            //JobInputView.render(storage_data);
+            TimeCardView.render(storage_data);
+            TotalDataView.render(storage_data);
+            
+            event.preventDefault();
+        });
+}
+
+
+TotalDataView.addEvent(storage);
 
 
 
