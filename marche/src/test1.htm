@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8"> 
-<title></title>
+<title>Marche Jobタイムマシーン</title>
 
 <style>
 
@@ -15,10 +15,32 @@ button {
     padding:0;
 }
 
+#subwindow {
+    display:none;
+    position:fixed;
+    z-index:1;
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    overflow:auto;
+    background-color:rgba(0,0,0,0.5);
+}
+
+.subwindow_view {
+    background-color:white;
+    width:200px;
+    margin:40% auto;
+}
+
 #main {
     display:flex;
     flex-wrap:wrap;
     
+}
+
+header li {
+    margin:2px;
 }
 
 article {
@@ -82,6 +104,10 @@ th, td {
         </ul>
     </nav>
 </header>
+
+<section id="subwindow">
+    <div class="subwindow_view"></div>
+</section>
 
 <section id="main">
     <article id="job_input_view">
@@ -578,6 +604,62 @@ TimeCardView.addEvent2 = (storage) => {
 
 TimeCardView.addEvent2(storage);
 
+
+////////////////////////
+TitleHeaderView = {};
+
+
+//
+
+/**
+*   タイトルヘッダ　CSV出力ボタン処理
+*
+*   @param storage
+*
+*/
+TitleHeaderView.addEvent = (storage) => {
+    document.querySelector('header button[name="csv_button"]')
+        .addEventListener('click', (event) =>{
+            let item = storage.getItem(NAMESPACE);
+            let storage_data = item? JSON.parse(item):{};
+            let str_csv = '<div>';
+            
+            Object.keys(storage_data).sort().forEach((jobtime) => {
+                str_csv += DateFormatter.toDate(jobtime) + ',';
+                str_csv += DateFormatter.toTime(jobtime) + ',';
+                str_csv += storage_data[jobtime] + "<br>";
+            });
+            
+            str_csv += '</div>';
+            str_csv += '<button>閉じる</button>';
+            
+            
+            
+            
+            let elem = document.querySelector('.subwindow_view');
+            elem.textContent = null;
+            elem.insertAdjacentHTML('beforeend', str_csv);
+            
+            elem.parentNode.style.display = 'block';
+            
+            
+            
+            
+            
+            
+            
+            console.log(elem)
+            
+            
+            
+            
+            
+            event.preventDefault();
+        });
+}
+
+
+TitleHeaderView.addEvent(storage);
 
 
 
