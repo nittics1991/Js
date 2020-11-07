@@ -15,7 +15,7 @@ button {
     padding:0;
 }
 
-#subwindow {
+#csv_view {
     display:none;
     position:fixed;
     z-index:1;
@@ -27,14 +27,17 @@ button {
     background-color:rgba(0,0,0,0.5);
 }
 
-#subwindow_view {
+#csv_view>div {
     background-color:white;
-    position: fixed;
-    left: 50%;
-    top: 50%;
+    position:fixed;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+
 }
 
-#subwindow_view div:last-child{
+#csv_view>div>div{
+    position:static;
     text-align:center;
 }
 
@@ -110,8 +113,15 @@ th, td {
     </nav>
 </header>
 
-<section id="subwindow">
-    <div id="subwindow_view"></div>
+<section id="csv_view">
+    <div>
+        <div>
+            <textarea name="csv_data"></textarea>
+        </div>
+        <div>
+            <button name="csv_close_button">閉じる</button>
+        </div>
+    </div>
 </section>
 
 <section id="main">
@@ -592,12 +602,6 @@ TimeCardView.addEvent2 = (storage) => {
             
             storage.setItem(NAMESPACE, JSON.stringify(storage_data));
             
-            
-            
-            
-            
-            
-            
             JobInputView.render(storage_data);
             TimeCardView.render(storage_data);
             TotalDataView.render(storage_data);
@@ -627,45 +631,18 @@ TitleHeaderView.addEvent = (storage) => {
         .addEventListener('click', (event) =>{
             let item = storage.getItem(NAMESPACE);
             let storage_data = item? JSON.parse(item):{};
-            let str_csv = '<div id="csv_view_data" title="ダブルクリックでコピー">';
+            let str_csv = '';
             
             Object.keys(storage_data).sort().forEach((jobtime) => {
                 str_csv += DateFormatter.toDate(jobtime) + ',';
                 str_csv += DateFormatter.toTime(jobtime) + ',';
-                str_csv += storage_data[jobtime] + "\n<br>";
+                str_csv += storage_data[jobtime] + "\n";
             });
             
-            str_csv += '<br></div>';
+            document.querySelector('textarea[name="csv_data"]')
+                .value = str_csv;
             
-            
-            str_csv += '<input id="csv_clipboard" type="text" style="display:none;">';
-            
-            str_csv += '<div><button id="csv_view_close">閉じる</button></div>';
-            
-            let elem = document.querySelector('#subwindow_view');
-            elem.textContent = null;
-            elem.insertAdjacentHTML('beforeend', str_csv);
-            
-            document.querySelector('#csv_view_close')
-                .addEventListener('click', (event) =>{
-                    elem = document.querySelector('#subwindow_view');
-                    while (elem.firstChild) {elem.firstChild.remove();}
-                    elem.parentNode.style.display = 'none';
-                });
-            
-            document.querySelector('#csv_view_data')
-                .addEventListener('dblclick', (event) =>{
-                    
-                    let input_text = document.querySelector('#csv_clipboard');
-                    input_text.value = event.target.textContent;
-                    input_text.select();
-                    document.execCommand("copy");
-                    
-                    //~ navigator.clipboard.writeText(event.target.textContent);
-                    
-                });
-            
-            elem.parentNode.style.display = 'block';
+            document.querySelector('#csv_view').style.display = 'block';
             
             event.preventDefault();
         });
@@ -675,10 +652,25 @@ TitleHeaderView.addEvent = (storage) => {
 TitleHeaderView.addEvent(storage);
 
 
+////////////////////////
+CsvView = {};
 
+/**
+*   CSV出力モーダル ボタン処理
+*
+*   @param storage
+*
+*/
+CsvView.addEvent = (storage) => {
+    document.querySelector('#csv_view button[name="csv_close_button"]')
+        .addEventListener('click', (event) =>{
+            document.querySelector('#csv_view').style.display = 'none';
+            
+            event.preventDefault();
+        });
+}
 
-
-
+CsvView.addEvent(storage);
 
 
 </script>
