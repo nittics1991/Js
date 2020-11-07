@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8"> 
-<title>Marche Jobタイムマシーン</title>
+<title>Marche Job Time Machine</title>
 
 <style>
 
@@ -27,10 +27,15 @@ button {
     background-color:rgba(0,0,0,0.5);
 }
 
-.subwindow_view {
+#subwindow_view {
     background-color:white;
-    width:200px;
-    margin:40% auto;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+}
+
+#subwindow_view div:last-child{
+    text-align:center;
 }
 
 #main {
@@ -93,7 +98,7 @@ th, td {
 <div id="container">
 
 <header>
-    <h1>Marche Jobタイムマシーン</h1>
+    <h1>Marche Job Time Machine</h1>
     
     <nav>
         <ul>
@@ -106,7 +111,7 @@ th, td {
 </header>
 
 <section id="subwindow">
-    <div class="subwindow_view"></div>
+    <div id="subwindow_view"></div>
 </section>
 
 <section id="main">
@@ -622,37 +627,45 @@ TitleHeaderView.addEvent = (storage) => {
         .addEventListener('click', (event) =>{
             let item = storage.getItem(NAMESPACE);
             let storage_data = item? JSON.parse(item):{};
-            let str_csv = '<div>';
+            let str_csv = '<div id="csv_view_data" title="ダブルクリックでコピー">';
             
             Object.keys(storage_data).sort().forEach((jobtime) => {
                 str_csv += DateFormatter.toDate(jobtime) + ',';
                 str_csv += DateFormatter.toTime(jobtime) + ',';
-                str_csv += storage_data[jobtime] + "<br>";
+                str_csv += storage_data[jobtime] + "\n<br>";
             });
             
-            str_csv += '</div>';
-            str_csv += '<button>閉じる</button>';
+            str_csv += '<br></div>';
             
             
+            str_csv += '<input id="csv_clipboard" type="text" style="display:none;">';
             
+            str_csv += '<div><button id="csv_view_close">閉じる</button></div>';
             
-            let elem = document.querySelector('.subwindow_view');
+            let elem = document.querySelector('#subwindow_view');
             elem.textContent = null;
             elem.insertAdjacentHTML('beforeend', str_csv);
             
+            document.querySelector('#csv_view_close')
+                .addEventListener('click', (event) =>{
+                    elem = document.querySelector('#subwindow_view');
+                    while (elem.firstChild) {elem.firstChild.remove();}
+                    elem.parentNode.style.display = 'none';
+                });
+            
+            document.querySelector('#csv_view_data')
+                .addEventListener('dblclick', (event) =>{
+                    
+                    let input_text = document.querySelector('#csv_clipboard');
+                    input_text.value = event.target.textContent;
+                    input_text.select();
+                    document.execCommand("copy");
+                    
+                    //~ navigator.clipboard.writeText(event.target.textContent);
+                    
+                });
+            
             elem.parentNode.style.display = 'block';
-            
-            
-            
-            
-            
-            
-            
-            console.log(elem)
-            
-            
-            
-            
             
             event.preventDefault();
         });
