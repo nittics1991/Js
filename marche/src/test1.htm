@@ -139,7 +139,7 @@ th, td {
             <thead>
                 <th>JOB名</th>
             </thead>
-            <tbody>
+            <tbody title="ダブルクリックで記録">
             </tbody>
         </table>
     </article>
@@ -161,7 +161,7 @@ th, td {
                 <th>開始時刻</th>
                 <th>作業(h)</th>
             </thead>
-            <tbody>
+            <tbody title="ダブルクリックで削除">
             </tbody>
         </table>
     </article>
@@ -209,7 +209,7 @@ job_dates = document.querySelectorAll('input[type="date"][name="job_date"]');
 
 
 
-if (storage_data == {}) {
+if (!Object.keys(storage_data).length) {
 
     storage_data[(new Date('2020-01-01 00:00:00')).getTime()] = 'AAA';
     storage_data[(new Date('2020-01-01 01:00:00')).getTime()] = 'BBB';
@@ -491,6 +491,25 @@ JobInputView.addEvent = (storage) => {
             storage.setItem(NAMESPACE, JSON.stringify(storage_data));
             
             jobname.value = '';
+            
+            JobInputView.render(storage_data);
+            TimeCardView.render(storage_data);
+            TotalDataView.render(storage_data);
+            
+            event.preventDefault();
+        });
+    
+    
+    //ダブルクリックで記録
+    document.querySelector('#job_input_view tbody')
+        .addEventListener('dblclick', (event) =>{
+            let item = storage.getItem(NAMESPACE);
+            let storage_data = item? JSON.parse(item):{};
+            
+            let id = (new Date()).getTime();
+            storage_data[id] = event.target.textContent;
+            
+            storage.setItem(NAMESPACE, JSON.stringify(storage_data));
             
             JobInputView.render(storage_data);
             TimeCardView.render(storage_data);
