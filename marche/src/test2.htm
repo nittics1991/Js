@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"> 
+<title>Marche Job Time Machine</title>
+
+<style>
+
+/**
+*   foundation-reset
+*/
+
+h1,h2,h3,h4,h5,h6 {
+    margin:0;
+}
+
+ul, ol {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+button {
+    padding:0;
+}
+
+
+
+/**
+*   foundation-init
+*/
+
+body {
+    font-size:16px;
+    margin:1px;
+}
+
+article {
+    width:320px;
+}
+
+h1 {
+    text-align:center;
+}
+
+input[type="text"]
+    ,input[type="date"]
+    ,input[type="number"]
+{
+    width:10rem;
+    height:1rem;
+}
+
+table {
+    border-collapse:collapse;
+    border:1px solid #c0c0c0;
+    width:90%;
+}
+
+th, td {
+    border:1px solid #c0c0c0;
+    white-space:nowrap;
+}
+
+
+
+/**
+*   layout
+*/
+
+#main {
+    display:flex;
+    flex-wrap:wrap;
+    
+}
+
+nav ul, nav ol {
+    display:flex;
+}
+
+
+/**
+*   object/utility common
+*/
+
+article {
+    padding:2px;
+}
+
+/**
+*   object/utility standalone
+*/
+
+header>div:first-child {
+    background-color:#2C97C6;
+}
+
+header>nav {
+    background-color:#0E2630;
+}
+
+header li {
+    margin:2px;
+}
+
+header a:link, a:visited {
+    color:#ffffff;
+    text-decoration:none;
+        
+}
+
+#csv_view {
+    display:none;
+    position:fixed;
+    z-index:1;
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    overflow:auto;
+    background-color:rgba(0,0,0,0.5);
+}
+
+#csv_view>div {
+    background-color:white;
+    position:fixed;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+
+}
+
+#csv_view>div>div{
+    position:static;
+    text-align:center;
+}
+
+#timecard_view td:first-child,
+    #timecard_view th:first-child {
+    display:none;
+}
+
+#timecard_view td:nth-child(3) {
+    text-align:center;
+}
+
+#timecard_view td:last-child {
+    text-align:right;
+}
+
+#total_data_view td:last-child {
+    text-align:right;
+}
+
+</style>
+
+</head>
+<body>
+
+<div id="container">
+
+<header>
+    <div>
+        <h1>Marche Job Time Machine</h1>
+    </div>
+    
+    <nav>
+        <ul>
+            <li><a href="#container">TOP</a></li>
+            <li><a href="#job_input_view">JOB入力</a></li>
+            <li><a href="#timecard_view">タイムカード</a></li>
+            <li><a href="#total_data_view">集計</a></li>
+            <li><a href="#config_view">設定</a></li>
+            <li><button name="csv_button">CSV出力</button></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="csv_view">
+    <div>
+        <div>
+            <textarea name="csv_data"></textarea>
+        </div>
+        <div>
+            <button name="csv_close_button">閉じる</button>
+        </div>
+    </div>
+</section>
+
+<section id="main">
+    <article id="job_input_view">
+        <h2>JOB入力</h2>
+        
+        <nav>
+            <ul>
+                <li><input type="text" name="job_name"></li>
+                <li><button name="job_name_button">登録</button></li>
+            </ul>
+        </nav>
+        
+        <table>
+            <thead>
+                <th>JOB名</th>
+            </thead>
+            <tbody title="ダブルクリックで記録">
+            </tbody>
+        </table>
+    </article>
+    
+    <article id="timecard_view">
+        <h2>タイムカード</h2>
+        
+        <nav>
+            <ul>
+                <li><input type="date" name="job_date"></li>
+            </ul>
+        </nav>
+        
+        
+        <table>
+            <thead>
+                <th>ID</th>
+                <th>JOB名</th>
+                <th>開始時刻</th>
+                <th>作業(h)</th>
+            </thead>
+            <tbody title="ダブルクリックで削除">
+            </tbody>
+        </table>
+    </article>
+    
+    <article id="total_data_view">
+        <h2>集計</h2>
+        
+        <nav>
+            <ul>
+                <li><input type="date" name="job_date"></li>
+            </ul>
+        </nav>
+        
+        <table>
+            <thead>
+                <th>JOB名</th>
+                <th>作業(h)</th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </article>
+    
+    <article id="config_view">
+        <h2>設定</h2>
+        
+        <nav>
+            <ul>
+                <li>データ保持日数</li>
+                <li><input type="number" name="config_expiration" min="0" max="400"></li>
+                <li><button name="config_expiration_button">登録</button></li>
+            </ul>
+        </nav>
+        
+        
+        
+        <nav>
+            <ul>
+                <li><input type="date" name="job_date"></li>
+            </ul>
+        </nav>
+        
+        <table>
+            <thead>
+                <th>JOB名</th>
+                <th>作業(h)</th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </article>
+    
+</section>
+
+</div>
+
+<!--
+
+<script src="./EventDispatcher.js"></script>
+<script src="./LocalSessionRepository.js"></script>
+
+-->
+
+<script>
+
+const NAMESPACE = 'marche';
+
+let storage = window.localStorage;
+
+let item = storage.getItem(NAMESPACE);
+let storage_data = item? JSON.parse(item):{};
+
+job_dates = document.querySelectorAll('input[type="date"][name="job_date"]');
+
+
+
+if (!Object.keys(storage_data).length) {
+
+    storage_data[(new Date('2020-01-01 00:00:00')).getTime()] = 'AAA';
+    storage_data[(new Date('2020-01-01 01:00:00')).getTime()] = 'BBB';
+    storage_data[(new Date('2020-01-01 02:00:00')).getTime()] = 'CCC';
+    storage_data[(new Date('2020-01-01 03:00:00')).getTime()] = 'DDD';
+    storage_data[(new Date('2020-01-03 04:00:00')).getTime()] = 'EEE';
+    storage_data[(new Date('2020-01-02 05:00:00')).getTime()] = 'FFF';
+    storage_data[(new Date('2020-01-02 06:00:00')).getTime()] = 'GGG';
+    storage_data[(new Date('2020-01-01 03:30:00')).getTime()] = 'BBB';
+    storage_data[(new Date('2020-01-01 03:45:00')).getTime()] = 'CCC';
+    storage_data[(new Date('2020-01-01 07:00:00')).getTime()] = '業務終了';
+    storage_data[(new Date('2020-01-02 08:00:00')).getTime()] = '業務終了';
+    storage_data[(new Date('2020-01-03 09:00:00')).getTime()] = '業務終了';
+
+    //LOOPテスト用
+    Object.prototype.hoge = function() {};
+
+
+    for (elm of job_dates) {
+       elm.value = '2020-01-01'; 
+    }
+} else {
+    let dt = new Date();
+    let unixtime = dt.getTime() - dt.getTimezoneOffset() * 60 * 1000;
+    let today = (new Date(unixtime)).toISOString().substr(0, 10);
+    
+    
+    for (elm of job_dates) {
+       elm.value = today;
+    }
+    
+}
+
+
+
+
+
+
+//////////////////////////////
+//EventDispatcher
+
+
+
+
+
+
+
+
+//////////////////////////////
+////関数
+
+
+DateFormatter = {};
+
+/**
+*   日付文字列取得
+*
+*   @param str_unixtime
+*   @return string
+*/
+DateFormatter.toDate = (str_unixtime) => {
+    let dt;
+    
+    try {
+        dt = new Date(parseInt(str_unixtime));
+    } catch (e) {
+        return '';
+    }
+    return (new Date(str_unixtime - dt.getTimezoneOffset() * 60 * 1000))
+        .toISOString().substr(0,10);
+}
+
+/**
+*   時刻文字列取得
+*
+*   @param str_unixtime
+*   @return string
+*/
+DateFormatter.toTime = (str_unixtime) => {
+    let dt;
+    
+    try {
+        dt = new Date(parseInt(str_unixtime));
+    } catch (e) {
+        return '';
+    }
+    return (new Date(str_unixtime - dt.getTimezoneOffset() * 60 * 1000))
+        .toISOString().substr(11,5);
+}
+
+
+
+
+JobInputView = {};
+
+/**
+*   JOB入力 描画
+*
+*   @param storage_data
+*
+*/
+JobInputView.render = (storage_data) => {
+    let str_table_data = '';
+    let memory_items = [];
+    
+    Object.values(storage_data).reverse().forEach(function(jobname) {
+        if (memory_items.indexOf(jobname) !== -1) {
+            return;
+        }
+        
+        str_table_data += '<tr>';
+        str_table_data += '<td>' + jobname + '</td>';
+        str_table_data += '</tr>';
+        
+        memory_items.push(jobname);
+    });
+    
+    let elem = document.querySelector('#job_input_view table tbody');
+    elem.textContent = null;
+    elem.insertAdjacentHTML('beforeend', str_table_data);
+}
+
+TimeCardView = {};
+
+/**
+*   タイムカード 描画
+*
+*   @param storage_data
+*
+*/
+TimeCardView.render = (storage_data) => {
+    let target_str_date =
+        document.querySelector('#timecard_view input[name="job_date"]')
+        .value;
+    let min_unixtime = (new Date(target_str_date + ' 00:00:00.000'))
+        .getTime();
+    let max_unixtime = (new Date(target_str_date + ' 23:59:59.999'))
+        .getTime();
+    let dataset = [];
+    
+    let prev_data = 0;
+    
+    Object.keys(storage_data).sort().forEach(function(jobtime) {
+        if (parseInt(jobtime) >= min_unixtime
+            && parseInt(jobtime) <= max_unixtime
+        ) {
+            let diff_time = (
+                (parseInt(jobtime) - prev_data) / 1000 / 60 / 60
+            ).toFixed(2);
+            
+            dataset.push({
+                id:jobtime,
+                name:storage_data[jobtime],
+                start_time:DateFormatter.toTime(jobtime),
+            });
+            
+            if (prev_data) {
+                dataset[dataset.length - 2]['diff_time'] = diff_time;
+            }
+            
+            prev_data = parseInt(jobtime);
+        }
+    });
+    
+    let str_table_data = '';
+    
+    dataset.forEach(function(obj) {
+        str_table_data += '<tr>';
+        str_table_data += '<td>' + obj.id + '</td>';
+        str_table_data += '<td>' + obj.name + '</td>';
+        str_table_data += '<td>' + obj.start_time + '</td>';
+        str_table_data += '<td>' + (obj.diff_time || '') + '</td>';
+        str_table_data += '</tr>';
+    });
+    
+    let elem = document.querySelector('#timecard_view table tbody');
+    elem.textContent = null;
+    elem.insertAdjacentHTML('beforeend', str_table_data);
+}
+
+TotalDataView = {};
+
+/**
+*   集計 描画
+*
+*   @param storage_data
+*
+*/
+TotalDataView.render = (storage_data) => {
+    let target_str_date =
+        document.querySelector('#total_data_view input[name="job_date"]')
+        .value;
+    let min_unixtime = (new Date(target_str_date + ' 00:00:00.000'))
+        .getTime();
+    let max_unixtime = (new Date(target_str_date + ' 23:59:59.999'))
+        .getTime();
+    let prev_pos = -1;
+    let prev_data = 0;
+    let total_key = [];
+    let total_data = [];
+    
+    Object.keys(storage_data).sort().forEach(function(jobtime) {
+        if (parseInt(jobtime) >= min_unixtime
+            && parseInt(jobtime) <= max_unixtime
+        ) {
+            let diff_time =
+                parseInt(jobtime) - prev_data;
+            let pos;
+            
+            if ((pos = total_key.indexOf(storage_data[jobtime])) === -1) {
+                pos = total_key.push(storage_data[jobtime]) - 1;
+                total_data[pos] = 0;
+            }
+            
+            total_data[prev_pos] += prev_pos > -1? diff_time:0;
+            
+            prev_pos = pos;
+            prev_data = parseInt(jobtime);
+        }
+    });
+    
+    let str_table_data = '';
+    
+    total_key.forEach(function(jobname, i) {
+        let diff_time = total_data[i]?
+        (total_data[i] / 1000 / 60 / 60).toFixed(2):'';
+            
+        str_table_data += '<tr>';
+        str_table_data += '<td>' + jobname + '</td>';
+        str_table_data += '<td>' + diff_time + '</td>';
+        str_table_data += '</tr>';
+    });
+    
+    
+    let elem = document.querySelector('#total_data_view table tbody');
+    elem.textContent = null;
+    elem.insertAdjacentHTML('beforeend', str_table_data);
+}
+
+
+//////////////////////////////
+
+
+
+if (storage_data) {
+    JobInputView.render(storage_data);
+    TimeCardView.render(storage_data);
+    TotalDataView.render(storage_data);
+}
+
+
+
+//////////////////////////////
+
+
+//イベント登録
+
+/**
+*   JOB入力 ボタン処理
+*
+*   @param storage
+*
+*/
+JobInputView.addEvent = (storage) => {
+    document.querySelector('#job_input_view button[name="job_name_button"]')
+        .addEventListener('click', (event) =>{
+            let jobname = document.querySelector('#job_input_view input[name="job_name"]');
+            
+            if (! jobname.value) {
+                return;
+            }
+            
+            let item = storage.getItem(NAMESPACE);
+            let storage_data = item? JSON.parse(item):{};
+            
+            let id = (new Date()).getTime();
+            storage_data[id] = jobname.value;
+            
+            storage.setItem(NAMESPACE, JSON.stringify(storage_data));
+            
+            jobname.value = '';
+            
+            JobInputView.render(storage_data);
+            TimeCardView.render(storage_data);
+            TotalDataView.render(storage_data);
+            
+            event.preventDefault();
+        });
+    
+    
+    //ダブルクリックで記録
+    document.querySelector('#job_input_view tbody')
+        .addEventListener('dblclick', (event) =>{
+            let item = storage.getItem(NAMESPACE);
+            let storage_data = item? JSON.parse(item):{};
+            
+            let id = (new Date()).getTime();
+            storage_data[id] = event.target.textContent;
+            
+            storage.setItem(NAMESPACE, JSON.stringify(storage_data));
+            
+            JobInputView.render(storage_data);
+            TimeCardView.render(storage_data);
+            TotalDataView.render(storage_data);
+            
+            event.preventDefault();
+        });
+}
+
+
+
+JobInputView.addEvent(storage);
+
+//
+
+/**
+*   タイムカード　日付変更処理
+*
+*   @param storage
+*
+*/
+TimeCardView.addEvent = (storage) => {
+    document.querySelector('#timecard_view input[name="job_date"]')
+        .addEventListener('change', (event) =>{
+            let total_data_view_job_date =
+                document.querySelector('#total_data_view input[name="job_date"]');
+            
+            if (total_data_view_job_date.value != event.target.value
+            ) {
+                
+                //直接ではなくmethodにしたい
+                total_data_view_job_date.value = event.target.value;
+            }
+            
+            //JOB入力は更新不要
+            //JobInputView.render(storage_data);
+            TimeCardView.render(storage_data);
+            TotalDataView.render(storage_data);
+            
+            event.preventDefault();
+        });
+}
+
+
+TimeCardView.addEvent(storage);
+
+
+//タイムカードと同じく全画面再表示
+/**
+*   集計　日付変更処理
+*
+*   @param storage
+*
+*/
+TotalDataView.addEvent = (storage) => {
+    document.querySelector('#total_data_view input[name="job_date"]')
+        .addEventListener('change', (event) =>{
+            let timecard_view_job_date =
+                document.querySelector('#timecard_view input[name="job_date"]');
+            
+            if (timecard_view_job_date.value != event.target.value
+            ) {
+                
+                //直接ではなくmethodにしたい
+                timecard_view_job_date.value = event.target.value;
+                
+                
+                
+            }
+            
+            
+            //JOB入力は更新不要
+            //JobInputView.render(storage_data);
+            TimeCardView.render(storage_data);
+            TotalDataView.render(storage_data);
+            
+            event.preventDefault();
+        });
+}
+
+
+TotalDataView.addEvent(storage);
+
+//
+
+/**
+*   タイムカード　削除処理
+*
+*   @param storage
+*
+*/
+TimeCardView.addEvent2 = (storage) => {
+    document.querySelector('#timecard_view table tbody')
+        .addEventListener('dblclick', (event) =>{
+            
+            let name = event.target.parentNode.children[1].textContent;
+            let dt = event.target.parentNode.children[2].textContent;
+            
+            if (!confirm(name + ' ' + dt + 'を削除しますか')) {
+                return;
+            }
+            
+            let id = event.target.parentNode.firstChild.textContent;
+            
+            let item = storage.getItem(NAMESPACE);
+            let storage_data = item? JSON.parse(item):{};
+            
+            delete storage_data[id];
+            
+            storage.setItem(NAMESPACE, JSON.stringify(storage_data));
+            
+            JobInputView.render(storage_data);
+            TimeCardView.render(storage_data);
+            TotalDataView.render(storage_data);
+            
+            event.preventDefault();
+        });
+}
+
+
+TimeCardView.addEvent2(storage);
+
+
+////////////////////////
+TitleHeaderView = {};
+
+
+//
+
+/**
+*   タイトルヘッダ　CSV出力ボタン処理
+*
+*   @param storage
+*
+*/
+TitleHeaderView.addEvent = (storage) => {
+    document.querySelector('header button[name="csv_button"]')
+        .addEventListener('click', (event) =>{
+            let item = storage.getItem(NAMESPACE);
+            let storage_data = item? JSON.parse(item):{};
+            let str_csv = '';
+            
+            Object.keys(storage_data).sort().forEach((jobtime) => {
+                str_csv += DateFormatter.toDate(jobtime) + ',';
+                str_csv += DateFormatter.toTime(jobtime) + ',';
+                str_csv += storage_data[jobtime] + "\n";
+            });
+            
+            document.querySelector('textarea[name="csv_data"]')
+                .value = str_csv;
+            
+            document.querySelector('#csv_view').style.display = 'block';
+            
+            event.preventDefault();
+        });
+}
+
+
+TitleHeaderView.addEvent(storage);
+
+
+////////////////////////
+CsvView = {};
+
+/**
+*   CSV出力モーダル ボタン処理
+*
+*   @param storage
+*
+*/
+CsvView.addEvent = (storage) => {
+    document.querySelector('#csv_view button[name="csv_close_button"]')
+        .addEventListener('click', (event) =>{
+            document.querySelector('#csv_view').style.display = 'none';
+            
+            event.preventDefault();
+        });
+}
+
+CsvView.addEvent(storage);
+
+
+</script>
+
+</body>
+</html> 
