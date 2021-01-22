@@ -1,0 +1,9 @@
+拡張機能作成入門
+https://developer.mozilla.org/ja/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension
+
+
+200122
+    未使用
+    icons,background-page.html,background-script.js
+
+
