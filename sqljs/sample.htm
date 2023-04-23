@@ -1,0 +1,30 @@
+<html lang="ja">
+<head>
+<title></title>
+</head>
+<body>
+</body>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js'></script>
+<script>
+
+    async function start() {
+        const sqlPromise = initSqlJs({
+          locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${file}`
+        });
+
+        let sqlFilePath = "db.sqlite";
+        const dataPromise = fetch(sqlFilePath).then(res => res.arrayBuffer());
+        const [SQL, buf] = await Promise.all([sqlPromise, dataPromise]);
+        const db = new SQL.Database(new Uint8Array(buf));
+        let query = "SELECT * FROM mytable";
+        let contents = db.exec(query);
+        console.log(contents);
+  }
+
+  start();
+
+</script>
+
+</html> 
+
